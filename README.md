@@ -56,3 +56,24 @@ Then run `composer.phar` to install:
 $ composer install --dev
 ```
 
+
+Classes
+----------------------
+
+### ClassProperty
+
+```php
+$property = new ClassProperty('key','123');
+echo $property->render(); // public $key = 123;
+```
+
+### ClassMethod
+
+```php
+$method = new ClassMethod('methodName',[ '$i' ], 'return $i;');
+```
+
+
+
+
+
