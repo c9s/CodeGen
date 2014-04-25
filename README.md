@@ -39,3 +39,20 @@ class Bar22 {
 INSTALL
 ------------------
 
+
+Define the dependency in your composer.json file:
+
+```json
+{
+    "require": {
+        "corneltek/class-template": "*"
+    }
+}
+```
+
+Then run `composer.phar` to install:
+
+```sh
+$ composer install --dev
+```
+
