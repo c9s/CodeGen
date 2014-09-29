@@ -17,8 +17,8 @@ $class1->addConst('TYPE_A', 1);
 $class1->addConst('TYPE_B', 2);
 $class1->addConst('TYPE_C', 3);
 
-$class1->addMethod('public','getTwo',array(),'return 2;');
-$class1->addMethod('public','getFoo',array('i'),'return $i;');
+$class1->addMethod('public','getTwo',[],'return 2;');
+$class1->addMethod('public','getFoo',['$i'],'return $i;');
 
 $class1->extendClass('FooClass');
 
