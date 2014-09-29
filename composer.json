@@ -19,8 +19,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "ClassTemplate": "src"
+        "psr-4": {
+            "ClassTemplate\\": "src/ClassTemplate/"
         }
     }
 }
