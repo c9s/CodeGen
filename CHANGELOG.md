@@ -9,6 +9,8 @@ Version 1.5
 - `AllowIndent` and `AutoIndent` is now removed from Block class, it's now depends
    on the indent level.
 - Added `BracketedBlock` to support bracket wrapped block.
+- Improved indentation.
+- Added Argument class
 
 Version 1.4.4
 -----------------
