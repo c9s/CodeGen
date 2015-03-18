@@ -5,6 +5,12 @@
          stopOnFailure="true"
          stopOnError="false"
          verbose="true">
+
+  <php>
+      <!--
+      <env name="OVERRIDE_FIXTURE" value="1"/>
+      -->
+  </php>
   <testsuites>
     <testsuite name="ClassTemplate">
       <directory suffix="Test.php">tests</directory>
