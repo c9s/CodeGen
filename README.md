@@ -7,7 +7,7 @@ SYNOPSIS
 -------------
 
 ```php
-$class1 = new ClassTemplate\ClassTemplate('Foo\\Bar22',array(
+$class1 = new ClassTemplate\ClassDeclare('Foo\\Bar22',array(
     'template' => 'Class.php.twig',
     'template_dirs' => array('src/ClassTemplate/Templates'),
 ));
