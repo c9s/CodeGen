@@ -4,10 +4,21 @@ CHANGELOG
 Version 2.0.x
 -----------------
 
-MethodCall
+MethodCallExpr
 
-- Changed `MethodCall` default object name from `this` to `$this`. be sure to create MethodClass with '$this'
+- `MethodCall` is now removed.
+- Changed `MethodCallExpr` default object name from `this` to `$this`. be sure to create MethodClass with '$this'
 - Improve argument exporting.
+- Renamed `MethodCallExpr` to `MethodCallExpr`
+
+Statement
+
+- `Statement` class now render the content with a comma at the end.
+
+Line
+
+- `Line` class was added to provide indentation operation.
+
 
 Version 1.4.5
 -----------------
