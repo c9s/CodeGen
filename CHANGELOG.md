@@ -1,6 +1,14 @@
 CHANGELOG
 ==================
 
+Version 2.0.x
+-----------------
+
+MethodCall
+
+- Changed `MethodCall` default object name from `this` to `$this`. be sure to create MethodClass with '$this'
+- Improve argument exporting.
+
 Version 1.4.5
 -----------------
 
