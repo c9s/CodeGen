@@ -1,6 +1,7 @@
 <?php
 namespace CodeGen;
 use CodeGen\Renderable;
+use CodeGen\Statement\Statement;
 
 class ClassProperty extends Statement implements Renderable
 {
