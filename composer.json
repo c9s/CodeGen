@@ -5,7 +5,9 @@
     "version": "2.0.0",
     "require": {
         "php": ">=5.4.0",
+        "doctrine/inflector": "*",
         "twig/twig": "*"
+
     },
     "require-dev": {
         "corneltek/phpunit-testmore": "dev-master"
