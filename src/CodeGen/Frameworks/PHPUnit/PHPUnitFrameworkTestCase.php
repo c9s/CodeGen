@@ -6,15 +6,16 @@ use CodeGen\ClassMethod;
 
 class PHPUnitFrameworkTestCase extends UserClass
 {
-    public function __construct($className) 
+    public function __construct($title) 
     {
-        parent::__construct($className);
+        $class = Inflector::classify($title);
+        parent::__construct($class);
         $this->extendClass('PHPUnit_Framework_TestCase', true);
     }
 
     public function addTest($testName) 
     {
-        $methodName = Inflector::camelize('test' . ucfirst($testName));
+        $methodName = 'test' . Inflector::classify($testName);
         $testMethod = new ClassMethod($methodName, [], []);
         $testMethod->setScope('public');
         $this->methods[] = $testMethod;

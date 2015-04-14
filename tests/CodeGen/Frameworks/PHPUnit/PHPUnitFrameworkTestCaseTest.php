@@ -23,5 +23,13 @@ class PHPUnitFrameworkTestCaseTest extends CodeGenTestCase
         $method[] = Assertions::assertEquals(10, new Raw(10));
         $this->assertCodeEqualsFile('tests/data/frameworks/phpunit/phpunit_testcase_simple.fixture', $testCase);
     }
+
+    public function testGeneratingTestCaseWithSentence()
+    {
+        $testCase = new PHPUnitFrameworkTestCase('What a simple test');
+        $method = $testCase->addTest('simple');
+        $this->assertCodeEqualsFile('tests/data/frameworks/phpunit/phpunit_testcase_title.fixture', $testCase);
+    }
+
 }
 
