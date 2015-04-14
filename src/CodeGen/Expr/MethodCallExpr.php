@@ -4,6 +4,7 @@ use Exception;
 use CodeGen\Renderable;
 use CodeGen\Raw;
 use CodeGen\VariableDeflator;
+use CodeGen\ArgumentList;
 use LogicException;
 
 class MethodCallExpr implements Renderable
@@ -12,16 +13,14 @@ class MethodCallExpr implements Renderable
 
     public $method;
 
-    public $arguments = array();
+    public $arguments;
 
-    public function __construct($objectName = '$this', $method = NULL, array $arguments = NULL) {
+    public function __construct($objectName = '$this', $method = NULL, array $arguments = array()) {
         $this->objectName = $objectName;
         if ($method) {
             $this->method = $method;
         }
-        if ($arguments) {
-            $this->arguments = $arguments;
-        }
+        $this->arguments = new ArgumentList($arguments);
     }
 
     public function method($name) 
@@ -32,7 +31,7 @@ class MethodCallExpr implements Renderable
 
     public function setArguments(array $args)
     {
-        $this->arguments = $args;
+        $this->arguments = new ArgumentList($args);
     }
 
     public function addArgument($arg) 
@@ -41,17 +40,8 @@ class MethodCallExpr implements Renderable
         return $this;
     }
 
-    public function serializeArguments(array $args) 
-    {
-        $strs = array();
-        foreach ($args as $arg) {
-            $strs[] = VariableDeflator::deflate($arg);
-        }
-        return join(', ',$strs);
-    }
-
     public function render(array $args = array()) {
-        return $this->objectName . '->' . $this->method . '(' . $this->serializeArguments($this->arguments) . ')';
+        return $this->objectName . '->' . $this->method . '(' . $this->arguments->render($args) . ')';
     }
 
     public function __toString() {

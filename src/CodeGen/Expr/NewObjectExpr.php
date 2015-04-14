@@ -4,24 +4,23 @@ use Exception;
 use CodeGen\Renderable;
 use CodeGen\Raw;
 use CodeGen\VariableDeflator;
+use CodeGen\ArgumentList;
 use LogicException;
 
 class NewObjectExpr implements Renderable
 {
     public $className;
 
-    public $arguments = array();
+    public $arguments;
 
-    public function __construct($className, array $arguments = NULL) {
+    public function __construct($className, array $arguments = array()) {
         $this->className = $className;
-        if ($arguments) {
-            $this->arguments = $arguments;
-        }
+        $this->arguments = new ArgumentList($arguments);
     }
 
     public function setArguments(array $args)
     {
-        $this->arguments = $args;
+        $this->arguments = new ArgumentList($args);
     }
 
     public function addArgument($arg) 
@@ -30,18 +29,9 @@ class NewObjectExpr implements Renderable
         return $this;
     }
 
-    public function serializeArguments(array $args) 
+    public function render(array $args = array())
     {
-        $strs = array();
-        foreach ($args as $arg) {
-            $strs[] = VariableDeflator::deflate($arg);
-        }
-        return join(', ',$strs);
-    }
-
-
-    public function render(array $args = array()) {
-        return 'new ' . $this->className . '(' . $this->serializeArguments($this->arguments) . ')';
+        return 'new ' . $this->className . '(' . $this->arguments->render($args) . ')';
     }
 
     public function __toString() {
