@@ -12,6 +12,10 @@ class UseClass extends Statement implements Renderable
         $this->as = $as ? ltrim($as,'\\') : null;
     }
 
+    public function getComponents() {
+        return explode('\\', $this->class);
+    }
+
     public function render(array $args = array())
     {
         $code = 'use ' . $this->class;

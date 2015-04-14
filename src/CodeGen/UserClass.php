@@ -174,6 +174,10 @@ class UserClass implements Renderable
         // When there is no namespace, we should skip the first-level class use statement.
         if ($this->uses) {
             foreach($this->uses as $u) {
+                // If we are not in a namespace, just skip these one component use statement
+                if (!$this->class->namespace && count($u->getComponents()) == 1) {
+                    continue;
+                }
                 $lines[] = $u->render();
             }
         }
