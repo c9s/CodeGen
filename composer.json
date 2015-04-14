@@ -2,12 +2,11 @@
     "name": "corneltek/codegen",
     "homepage": "http://github.com/c9s/CodeGen",
     "description": "PHP Code Generation Library",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "require": {
         "php": ">=5.4.0",
         "doctrine/inflector": "*",
         "twig/twig": "*"
-
     },
     "require-dev": {
         "corneltek/phpunit-testmore": "dev-master"
@@ -20,5 +19,9 @@
             "homepage": "http://c9s.me"
         }
     ],
-    "autoload": { "psr-4": { "CodeGen\\": "src/CodeGen/" } }
+    "autoload": {
+        "psr-4": {
+            "CodeGen\\": "src/CodeGen/"
+        }
+    }
 }
