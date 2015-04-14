@@ -4,6 +4,7 @@ use CodeGen\Statement\Statement;
 use CodeGen\Block;
 use CodeGen\Renderable;
 use CodeGen\VariableDeflator;
+use CodeGen\Utils;
 
 class IfStatement extends Block implements Renderable
 {
@@ -15,11 +16,7 @@ class IfStatement extends Block implements Renderable
     {
         $this->condition = $condition;
         if ($block) {
-            if (is_callable($block)) {
-                $this->ifblock = $block();
-            } else {
-                $this->ifblock = $block;
-            }
+            $this->ifblock = Utils::evalCallback($block);
         } else {
             $this->ifblock = new Block;
         }
@@ -33,7 +30,6 @@ class IfStatement extends Block implements Renderable
     public function render(array $args = array()) 
     {
         $this->ifblock->setIndentLevel($this->indentLevel + 1);
-
         $this[] = 'if (' . VariableDeflator::deflate($this->condition) . ') {';
         $this[] = $this->ifblock;
         $this[] = '}';

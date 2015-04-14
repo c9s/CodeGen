@@ -18,6 +18,10 @@ class Utils
         return $twig->render($templateContent, $args);
     }
 
+    static public function evalCallback($cb) {
+        return is_callable($cb) ? $cb() : $cb;
+    }
+
     static public function indent($indent = 1, $spaces = 4)
     {
         return str_repeat(' ', $spaces * $indent );
