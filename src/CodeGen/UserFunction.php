@@ -77,7 +77,7 @@ class UserFunction extends Block implements Renderable
 
     public function render(array $args = array()) {
         return 'function ' . $this->name . '(' . $this->renderArguments() . ")\n"
-            . $this->getBlock()->render($args);
+            . $this->block->render($args);
     }
 
 }
