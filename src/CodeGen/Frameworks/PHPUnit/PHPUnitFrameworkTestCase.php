@@ -8,7 +8,7 @@ class PHPUnitFrameworkTestCase extends UserClass
 {
     public function __construct($title) 
     {
-        $class = Inflector::classify($title);
+        $class = Inflector::classify(preg_replace('/\W+/',' ',$title));
         parent::__construct($class);
         $this->extendClass('PHPUnit_Framework_TestCase', true);
     }
