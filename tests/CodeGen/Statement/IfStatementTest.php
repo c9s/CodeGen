@@ -20,5 +20,26 @@ class IfStatementTest extends CodeGenTestCase
         });
         $this->assertCodeEqualsFile('tests/data/if_statement.fixture', $ifFoo);
     }
+
+    public function testIfElseIfStatement()
+    {
+        $foo = new Variable('$foo');
+        $ifFoo = new IfStatement($foo, function() use ($foo) {
+            $block = new Block;
+            $block[] = new Statement(new AssignExpr($foo, new Constant(30)));
+            return $block;
+        });
+        $ifFoo->elif($foo, function() use($foo) {
+            $block = new Block;
+            $block[] = new Statement(new AssignExpr($foo, new Constant(20)));
+            return $block;
+        });
+        $ifFoo->elif($foo, function() use($foo) {
+            $block = new Block;
+            $block[] = new Statement(new AssignExpr($foo, new Constant(10)));
+            return $block;
+        });
+        $this->assertCodeEqualsFile('tests/data/if_else_if_statement.fixture', $ifFoo);
+    }
 }
 
