@@ -19,9 +19,52 @@ class Assertions
         return new Statement($expr);
     }
 
+    static public function assertRegExp($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertRegExp', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertStringMatchesFormat($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertStringMatchesFormat', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertStringMatchesFormatFile($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertStringMatchesFormatFile', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertStringEqualsFile($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertStringEqualsFile', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertStringStartsWith($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertStringStartsWith', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertStringEndsWith($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertStringEndsWith', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+
     static public function assertSame($expected, $actual, $message = '') 
     {
         $expr = new SelfMethodCallExpr('assertSame', push_if([$expected, $actual], $message) );
+        return new Statement($expr);
+    }
+
+    static public function assertNull($actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertNull', push_if([$actual], $message) );
         return new Statement($expr);
     }
 
@@ -87,7 +130,13 @@ class Assertions
 
     static public function assertFileEquals($fileExpected, $fileActual, $message = '') 
     {
-        $expr = new SelfMethodCallExpr('assertFalse', push_if([$fileExpected, $fileActual], $message));
+        $expr = new SelfMethodCallExpr('assertFileEquals', push_if([$fileExpected, $fileActual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertJsonFileEqualsJsonFile($fileExpected, $fileActual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertJsonFileEqualsJsonFile', push_if([$fileExpected, $fileActual], $message));
         return new Statement($expr);
     }
 
@@ -100,6 +149,37 @@ class Assertions
     static public function assertGreaterThan($expected, $actual, $message = '') 
     {
         $expr = new SelfMethodCallExpr('assertGreaterThan', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertGreaterThanOrEqual($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertGreaterThanOrEqual', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertLessThan($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertLessThan', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertLessThanOrEqual($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertLessThanOrEqual', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+
+    static public function assertInstanceOf($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertInstanceOf', push_if([$expected, $actual], $message));
+        return new Statement($expr);
+    }
+
+    static public function assertInternalType($expected, $actual, $message = '') 
+    {
+        $expr = new SelfMethodCallExpr('assertInternalType', push_if([$expected, $actual], $message));
         return new Statement($expr);
     }
 
