@@ -3,6 +3,7 @@ namespace CodeGen;
 use CodeGen\Utils;
 use CodeGen\Renderable;
 use CodeGen\Indenter;
+use CodeGen\Statement\Statement;
 
 class ClassConst extends Statement implements Renderable
 {

@@ -1,5 +1,5 @@
 <?php
-namespace ClassTemplate;
+namespace CodeGen;
 
 interface Exportable
 {
