@@ -11,8 +11,8 @@ use LogicException;
  */
 class SelfMethodCallExpr extends MethodCallExpr
 {
-    public function __construct($method = NULL, array $arguments = NULL) {
-        parent::__construct('$this');
+    public function __construct($method = NULL, array $arguments = array()) {
+        parent::__construct('$this', $method, $arguments);
     }
 }
 
