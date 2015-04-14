@@ -13,7 +13,10 @@
   </php>
   <testsuites>
     <testsuite name="ClassTemplate">
-      <directory suffix="Test.php">tests</directory>
+        <directory suffix="Test.php">tests/ClassTemplate</directory>
+    </testsuite>
+    <testsuite name="CodeGen">
+        <directory suffix="Test.php">tests/CodeGen</directory>
     </testsuite>
   </testsuites>
 </phpunit>

@@ -4,7 +4,7 @@
     "description": "Class template Utilities",
     "version": "2.0.0",
     "require": {
-        "php": ">=5.3.0",
+        "php": ">=5.4.0",
         "twig/twig": "*"
     },
     "require-dev": {
@@ -20,7 +20,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "ClassTemplate\\": "src/ClassTemplate/"
+            "ClassTemplate\\": "src/ClassTemplate/",
+            "CodeGen\\": "src/CodeGen/"
         }
     }
 }
