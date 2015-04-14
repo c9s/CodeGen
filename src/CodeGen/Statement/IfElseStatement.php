@@ -8,33 +8,29 @@ use CodeGen\Utils;
 
 class IfElseStatement extends IfStatement implements Renderable
 {
-    protected $elseblock;
+    public $else;
 
     protected $elifs = [];
 
-    public function __construct(Renderable $condition, $ifblock = NULL, $elseblock = NULL)
+    public function __construct(Renderable $condition, $ifblock = NULL, $else = NULL)
     {
         parent::__construct($condition, $ifblock);
         
-        if ($elseblock) {
-            $this->elseblock = Utils::evalCallback($elseblock);
+        if ($else) {
+            $this->else = Utils::evalCallback($else);
         }
-    }
-
-    public function elif($condition, $elifblock) {
-        // $this->elifs 
     }
 
     public function render(array $args = array()) 
     {
-        $this->ifblock->setIndentLevel($this->indentLevel + 1);
+        $this->if->setIndentLevel($this->indentLevel + 1);
         $this[] = 'if (' . VariableDeflator::deflate($this->condition) . ') {';
-        $this[] = $this->ifblock;
+        $this[] = $this->if;
 
-        if ($this->elseblock) {
+        if ($this->else) {
             $this[] = '} else {';
-            $this->elseblock->setIndentLevel($this->indentLevel + 1);
-            $this[] = $this->elseblock;
+            $this->else->setIndentLevel($this->indentLevel + 1);
+            $this[] = $this->else;
             $this[] = '}';
         } else {
             $this[] = '}';

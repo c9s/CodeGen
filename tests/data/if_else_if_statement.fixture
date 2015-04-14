@@ -4,4 +4,6 @@ if ($foo) {
     $foo = 20;
 } else if ($foo) {
     $foo = 10;
+} else {
+
 }

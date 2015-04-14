@@ -11,17 +11,19 @@ class IfStatement extends Block implements Renderable
 {
     protected $condition;
 
-    protected $ifblock;
+    public $if;
 
-    protected $elseIfBlocks = array();
+    protected $else;
+
+    protected $elseifs = array();
 
     public function __construct(Renderable $condition, $block = NULL)
     {
         $this->condition = $condition;
         if ($block) {
-            $this->ifblock = Utils::evalCallback($block);
+            $this->if = Utils::evalCallback($block);
         } else {
-            $this->ifblock = new Block;
+            $this->if = new Block;
         }
     }
 
@@ -34,21 +36,36 @@ class IfStatement extends Block implements Renderable
      */
     public function elif($condition, $block) 
     {
-        $this->elseIfBlocks[] = new ElseIfStatement($condition, $block);
+        $this->elseifs[] = new ElseIfStatement($condition, $block);
+        return $this;
+    }
+
+    public function __call($method, $args)
+    {
+        if ($method == "else") {
+            return $this->_else($args[0]);
+        }
+    }
+
+    public function _else($block) {
+        $this->else = new ElseStatement($block);
         return $this;
     }
 
     public function render(array $args = array()) 
     {
-        $this->ifblock->setIndentLevel($this->indentLevel + 1);
+        $this->if->setIndentLevel($this->indentLevel + 1);
         $this[] = 'if (' . VariableDeflator::deflate($this->condition) . ') {';
-        $this[] = $this->ifblock;
+        $this[] = $this->if;
 
         $trailingBlocks = [];
-        if (!empty($this->elseIfBlocks)) {
-            foreach($this->elseIfBlocks as $elseIf) {
+        if (!empty($this->elseifs)) {
+            foreach($this->elseifs as $elseIf) {
                 $trailingBlocks[] = rtrim($elseIf->render($args));
             }
+        }
+        if ($this->else) {
+            $trailingBlocks[] = rtrim($this->else->render($args));
         }
         
         $this[] = '}' . join('',$trailingBlocks);

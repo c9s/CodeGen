@@ -39,6 +39,10 @@ class IfStatementTest extends CodeGenTestCase
             $block[] = new Statement(new AssignExpr($foo, new Constant(10)));
             return $block;
         });
+        $ifFoo->else(function() use($foo) {
+            $block = new Block;
+            return $block;
+        });
         $this->assertCodeEqualsFile('tests/data/if_else_if_statement.fixture', $ifFoo);
     }
 }
