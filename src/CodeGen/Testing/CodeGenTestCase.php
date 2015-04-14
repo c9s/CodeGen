@@ -5,6 +5,14 @@ use PHPUnit_Framework_TestCase;
 
 abstract class CodeGenTestCase extends PHPUnit_Framework_TestCase
 {
+
+    public function assertCodeEquals($expected, Renderable $code, array $args = array()) 
+    {
+        $out = $code->render($args);
+        $this->assertEquals($expected, $out);
+    }
+
+
     public function assertCodeEqualsFile($fixtureFile, Renderable $code, array $args = array()) {
         $out = $code->render($args);
         if (!file_exists($fixtureFile) || getenv('OVERRIDE_FIXTURE') ) {
