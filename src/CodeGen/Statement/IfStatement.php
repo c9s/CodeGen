@@ -9,33 +9,35 @@ class IfStatement extends Block implements Renderable
 {
     protected $condition;
 
-    protected $block;
+    protected $ifblock;
 
     public function __construct(Renderable $condition, $block = NULL)
     {
         $this->condition = $condition;
         if ($block) {
             if (is_callable($block)) {
-                $this->block = $block();
+                $this->ifblock = $block();
             } else {
-                $this->block = $block;
+                $this->ifblock = $block;
             }
         } else {
-            $this->block = new Block;
+            $this->ifblock = new Block;
         }
     }
 
     public function getBlock()
     {
-        return $this->block;
+        return $this->ifblock;
     }
 
     public function render(array $args = array()) 
     {
+        $this->ifblock->setIndentLevel($this->indentLevel + 1);
+
         $this[] = 'if (' . VariableDeflator::deflate($this->condition) . ') {';
-        $this[] = $this->block;
+        $this[] = $this->ifblock;
         $this[] = '}';
-        return $block->render($args);
+        return parent::render($args);
     }
 
 }

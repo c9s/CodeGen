@@ -19,7 +19,7 @@ class AssignExpr implements Renderable
 
     public function render(array $args = array()) 
     {
-        return $this->lvalue . ' = ' . VariableDeflator::deflate($this->expr);
+        return VariableDeflator::deflate($this->lvalue) . ' = ' . VariableDeflator::deflate($this->expr);
     }
 
 }

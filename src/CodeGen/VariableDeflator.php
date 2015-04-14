@@ -11,7 +11,7 @@ class VariableDeflator
         if (is_string($arg) && $arg[0] == '$') {
             return $arg;
         } else if ($arg instanceof Renderable) {
-            return $arg->render($args);
+            return $arg->render([]);
         } else if ($arg instanceof Raw) {
             return $arg->__toString();
         } else if ($arg instanceof Exportable || method_exists($arg, "__get_state")) {
