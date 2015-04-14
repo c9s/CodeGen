@@ -4,6 +4,7 @@ use CodeGen\Comment;
 use CodeGen\CommentBlock;
 
 trait Annotator {  
+
     public $comment;
 
     public function annotate($comment) {
