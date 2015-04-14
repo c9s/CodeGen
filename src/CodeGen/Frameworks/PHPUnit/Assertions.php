@@ -1,7 +1,7 @@
 <?php
 namespace CodeGen\Frameworks\PHPUnit;
 use CodeGen\Expr\SelfMethodCallExpr;
-use CodeGen\Statement;
+use CodeGen\Statement\Statement;
 
 function push_if($array, $element) 
 {

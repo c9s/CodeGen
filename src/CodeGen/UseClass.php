@@ -1,5 +1,6 @@
 <?php
 namespace CodeGen;
+use CodeGen\Statement\Statement;
 
 class UseClass extends Statement implements Renderable
 {

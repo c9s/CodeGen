@@ -1,6 +1,7 @@
 <?php
-namespace CodeGen;
+namespace CodeGen\Statement;
 use CodeGen\Renderable;
+use CodeGen\Line;
 
 class Statement extends Line implements Renderable
 {

@@ -1,7 +1,7 @@
 <?php
 namespace CodeGen;
 use CodeGen\Renderable;
-use CodeGen\Statement;
+use CodeGen\Statement\Statement;
 
 /**
  * use HelloWorld { sayHello as private myPrivateHello; }
@@ -47,7 +47,7 @@ class ClassTrait extends Statement implements Renderable
             $out .= ";";
         } else {
             $block = new BracketedBlock;
-            foreach($this->definitions as $def) {
+            foreach ($this->definitions as $def) {
                 $block[] = $def;
             }
             $out .= $block->render($args);

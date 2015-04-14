@@ -1,7 +1,7 @@
 <?php
 use CodeGen\Expr\AssignExpr;
 use CodeGen\Raw;
-use CodeGen\Statement;
+use CodeGen\Statement\Statement;
 use CodeGen\Testing\CodeGenTestCase;
 
 class AssignExprTest extends CodeGenTestCase
@@ -11,8 +11,6 @@ class AssignExprTest extends CodeGenTestCase
         $assign = new AssignExpr('$foo', 10);
         $statement = new Statement($assign);
         $this->assertCodeEquals('$foo = 10;', $statement);
-
-
     }
 }
 
