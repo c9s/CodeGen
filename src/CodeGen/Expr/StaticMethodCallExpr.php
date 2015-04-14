@@ -1,5 +1,5 @@
 <?php
-namespace CodeGen;
+namespace CodeGen\Expr;
 use Exception;
 use CodeGen\Renderable;
 use CodeGen\Raw;
@@ -8,14 +8,14 @@ use LogicException;
 
 class MethodCallExpr implements Renderable
 {
-    public $objectName;
+    public $className;
 
     public $method;
 
     public $arguments = array();
 
-    public function __construct($objectName = '$this', $method = NULL, array $arguments = NULL) {
-        $this->objectName = $objectName;
+    public function __construct($className, $method = NULL, array $arguments = NULL) {
+        $this->className = $className;
         if ($method) {
             $this->method = $method;
         }
@@ -51,7 +51,7 @@ class MethodCallExpr implements Renderable
     }
 
     public function render(array $args = array()) {
-        return $this->objectName . '->' . $this->method . '(' . $this->serializeArguments($this->arguments) . ')';
+        return $this->className . '::' . $this->method . '(' . $this->serializeArguments($this->arguments) . ')';
     }
 
     public function __toString() {

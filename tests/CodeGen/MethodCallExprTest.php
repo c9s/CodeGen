@@ -1,11 +1,12 @@
 <?php
 use CodeGen\Raw;
+use CodeGen\Expr\MethodCallExpr;
 
 class MethodCallExprTest extends PHPUnit_Framework_TestCase
 {
     public function test()
     {
-        $call = new CodeGen\MethodCallExpr;
+        $call = new MethodCallExpr;
         $call->method('doSomething');
         $call->addArgument(123);
         $call->addArgument('foo');

@@ -1,5 +1,5 @@
 <?php
-namespace CodeGen;
+namespace CodeGen\Expr;
 use Exception;
 use CodeGen\Renderable;
 use CodeGen\Raw;

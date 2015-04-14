@@ -1,33 +1,22 @@
 <?php
-namespace CodeGen;
+namespace CodeGen\Expr;
 use Exception;
 use CodeGen\Renderable;
 use CodeGen\Raw;
 use CodeGen\VariableDeflator;
 use LogicException;
 
-class MethodCallExpr implements Renderable
+class NewObjectExpr implements Renderable
 {
     public $className;
 
-    public $method;
-
     public $arguments = array();
 
-    public function __construct($className, $method = NULL, array $arguments = NULL) {
+    public function __construct($className, array $arguments = NULL) {
         $this->className = $className;
-        if ($method) {
-            $this->method = $method;
-        }
         if ($arguments) {
             $this->arguments = $arguments;
         }
-    }
-
-    public function method($name) 
-    {
-        $this->method = $name;
-        return $this;
     }
 
     public function setArguments(array $args)
@@ -50,8 +39,9 @@ class MethodCallExpr implements Renderable
         return join(', ',$strs);
     }
 
+
     public function render(array $args = array()) {
-        return $this->className . '::' . $this->method . '(' . $this->serializeArguments($this->arguments) . ')';
+        return 'new ' . $this->className . '(' . $this->serializeArguments($this->arguments) . ')';
     }
 
     public function __toString() {
