@@ -219,7 +219,7 @@ class UserClass implements Renderable
 
     public function getSplFilePath()
     {
-        return str_replace('\\','_',$this->class->getFullName()) );
+        return str_replace('\\','_',$this->class->getFullName());
     }
 
     public function addTrait(ClassTrait $trait) {
