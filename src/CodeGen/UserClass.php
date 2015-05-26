@@ -166,7 +166,7 @@ class UserClass implements Renderable
 
     public function render(array $args = array())
     {
-        $lines = []; // Add an option to render with a php tag
+        $lines = array(); // Add an option to render with a php tag
         if ($this->class->namespace) {
             $lines[] = 'namespace ' . $this->class->namespace . ';';
         }

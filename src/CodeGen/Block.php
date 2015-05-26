@@ -54,7 +54,7 @@ class Block implements IteratorAggregate, ArrayAccess, Renderable
         } elseif (is_array($text)) {
             $this->lines = $text;
         } else {
-            throw new InvalidArgumentTypeException("Invalid body type", $text, [ 'string', 'array' ]);
+            throw new InvalidArgumentTypeException("Invalid body type", $text, array('string', 'array'));
         }
     }
 
@@ -111,7 +111,7 @@ class Block implements IteratorAggregate, ArrayAccess, Renderable
                 }
             } else {
                 var_dump( $line ); 
-                throw new InvalidArgumentTypeException("Unsupported line object type", $line, ['string', 'Renderable']);
+                throw new InvalidArgumentTypeException("Unsupported line object type", $line, array('string', 'Renderable'));
             }
         }
         return Utils::renderStringTemplate($body, array_merge($this->args,$args));
