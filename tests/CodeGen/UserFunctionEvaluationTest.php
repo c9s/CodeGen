@@ -5,7 +5,7 @@ class UserFunctionEvaluationTest extends PHPUnit_Framework_TestCase
 {
     public function testUserFunc()
     {
-        $func = new UserFunction('user_foo', ['$i', '$x = 2'], 'return $i + $x;');
+        $func = new UserFunction('user_foo', array('$i', '$x = 2'), 'return $i + $x;');
         ok($func);
         ok($func->render());
         eval($func->render());
@@ -20,7 +20,7 @@ class UserFunctionEvaluationTest extends PHPUnit_Framework_TestCase
 
     public function testUserFuncWithBody()
     {
-        $func = new UserFunction('user_foo_body', ['$i', '$x = 2'], 'return $i + $x * {{f}};', [ 'f' => 100 ]);
+        $func = new UserFunction('user_foo_body', array('$i', '$x = 2'), 'return $i + $x * {{f}};', array('f' => 100 ));
         ok($func);
         ok($func->render());
         eval($func->render());

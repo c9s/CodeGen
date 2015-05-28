@@ -84,10 +84,10 @@ DAMAGE.";
                 $content = self::BSD3;
                 break;
         }
-        $content = Utils::renderStringTemplate($content, [ 
+        $content = Utils::renderStringTemplate($content, array(
             'year' => $year,
             'holder' => $holder,
-        ]);
+        ));
         parent::__construct(explode("\n",$content));
     }
 

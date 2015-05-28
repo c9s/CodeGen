@@ -58,7 +58,7 @@ class IfStatement extends Block implements Renderable
         $this[] = 'if (' . VariableDeflator::deflate($this->condition) . ') {';
         $this[] = $this->if;
 
-        $trailingBlocks = [];
+        $trailingBlocks = array();
         if (!empty($this->elseifs)) {
             foreach($this->elseifs as $elseIf) {
                 $trailingBlocks[] = rtrim($elseIf->render($args));

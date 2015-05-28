@@ -10,7 +10,7 @@ class IfElseStatement extends IfStatement implements Renderable
 {
     public $else;
 
-    protected $elifs = [];
+    protected $elifs = array();
 
     public function __construct(Renderable $condition, $ifblock = NULL, $else = NULL)
     {

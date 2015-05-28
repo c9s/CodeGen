@@ -16,7 +16,7 @@ class PHPUnitFrameworkTestCase extends UserClass
     public function addTest($testName) 
     {
         $methodName = 'test' . Inflector::classify($testName);
-        $testMethod = new ClassMethod($methodName, [], []);
+        $testMethod = new ClassMethod($methodName, array(), array());
         $testMethod->setScope('public');
         $this->methods[] = $testMethod;
         return $testMethod;

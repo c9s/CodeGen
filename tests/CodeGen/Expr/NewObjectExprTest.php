@@ -12,7 +12,7 @@ class NewObjectExprTest extends PHPUnit_Framework_TestCase
 
     public function testNewObjectExprWithSplFixedArray()
     {
-        $expr = new NewObjectExpr('SplFixedArray', [ 100 ]);
+        $expr = new NewObjectExpr('SplFixedArray', array(100));
         $code = $expr->render();
         $this->assertEquals('new SplFixedArray(100)', $code);
     }
