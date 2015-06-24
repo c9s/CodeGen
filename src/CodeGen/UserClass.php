@@ -189,7 +189,7 @@ class UserClass implements Renderable
         if ($this->interfaces) {
             $lines[] = Indenter::indent(1) . 'implements ' . join(', ', array_map(function($class) { 
                 return $class->name;
-            }, $this->class->interfaces));
+            }, $this->interfaces));
         }
 
         $block = new BracketedBlock;
