@@ -92,15 +92,15 @@ class UserClass implements Renderable
 
     public function addMethod($scope, $methodName, array $arguments = array(), $body = array(), array $bodyArguments = array())
     {
-        $method = new ClassMethod( $methodName, $arguments, $body, $bodyArguments);
+        $method = new ClassMethod($methodName, $arguments, $body, $bodyArguments);
         $method->setScope($scope);
-        $this->methods[] = $method;
+        $this->methods[$methodName] = $method;
         return $method;
     }
 
     public function addMethodObject(ClassMethod $method)
     {
-        $this->methods[] = $method;
+        $this->methods[$method->getName()] = $method;
     }
 
     public function addConst($name,$value)

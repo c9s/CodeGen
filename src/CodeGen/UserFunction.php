@@ -8,6 +8,7 @@ use CodeGen\Indenter;
 class UserFunction extends Block implements Renderable
 {
     public $name;
+
     public $arguments = array();
 
     public $bodyArguments = array();
@@ -41,6 +42,11 @@ class UserFunction extends Block implements Renderable
         if ($bodyArguments) {
             $this->block->setDefaultArguments($bodyArguments);
         }
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function setIndentLevel($level) {
