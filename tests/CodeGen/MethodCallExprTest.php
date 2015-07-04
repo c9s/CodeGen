@@ -1,10 +1,46 @@
 <?php
 use CodeGen\Raw;
+use CodeGen\Variable;
 use CodeGen\Expr\MethodCallExpr;
+use CodeGen\Testing\CodeGenTestCase;
 
-class MethodCallExprTest extends PHPUnit_Framework_TestCase
+class MethodCallExprTest extends CodeGenTestCase
 {
-    public function test()
+
+    public function testObjectNameVariable()
+    {
+        $variable = new Variable('$obj2');
+        $call = new MethodCallExpr('$obj2');
+        $call->method('addStr');
+        $call->addArgument('str');
+        $this->assertCodeEqualsFile('tests/data/method_call_obj_var_add_str.fixture', $call);
+    }
+
+    public function testObjectNameString()
+    {
+        $call = new MethodCallExpr('$obj');
+        $call->method('addStr');
+        $call->addArgument('str');
+        $this->assertCodeEqualsFile('tests/data/method_call_obj_add_str.fixture', $call);
+    }
+
+    public function testString()
+    {
+        $call = new MethodCallExpr;
+        $call->method('addStr');
+        $call->addArgument('str');
+        $this->assertCodeEqualsFile('tests/data/method_call_add_str.fixture', $call);
+    }
+
+    public function testIntArgument()
+    {
+        $call = new MethodCallExpr;
+        $call->method('addInt');
+        $call->addArgument(123);
+        $this->assertCodeEqualsFile('tests/data/method_call_add_int.fixture', $call);
+    }
+
+    public function testComplexArgumentList()
     {
         $call = new MethodCallExpr;
         $call->method('doSomething');
@@ -12,9 +48,7 @@ class MethodCallExprTest extends PHPUnit_Framework_TestCase
         $call->addArgument('foo');
         $call->addArgument(new Raw('new SplObjectStorage'));
         $call->addArgument(array( 'name' => 'hack' ));
-        $str = $call->render();
-        ok($str);
-        is("\$this->doSomething(123, 'foo', new SplObjectStorage, array (\n  'name' => 'hack',\n))",$str);
+        $this->assertCodeEqualsFile('tests/data/method_call.fixture', $call);
     }
 }
 

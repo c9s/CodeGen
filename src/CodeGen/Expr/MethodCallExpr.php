@@ -9,6 +9,9 @@ use LogicException;
 
 class MethodCallExpr implements Renderable
 {
+    /**
+     * @var Variable|string
+     */
     public $objectName;
 
     public $method;
@@ -41,7 +44,15 @@ class MethodCallExpr implements Renderable
     }
 
     public function render(array $args = array()) {
-        return $this->objectName . '->' . $this->method . '(' . $this->arguments->render($args) . ')';
+        $out = '';
+
+        if ($this->objectName instanceof Renderable) {
+            $out .= $this->objectName->render($args);
+        } else {
+            $out .= $this->objectName;
+        }
+        $out .= '->' . $this->method . '(' . $this->arguments->render($args) . ')';
+        return $out;
     }
 
     public function __toString() {
