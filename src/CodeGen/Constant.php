@@ -4,16 +4,19 @@ use CodeGen\Renderable;
 
 class Constant implements Renderable
 {
-    protected $name;
+    protected $val;
 
-    public function __construct($name)
+    public function __construct($val)
     {
-        $this->name = $name;
+        $this->val = $val;
     }
 
     public function render(array $args = array()) 
     {
-        return $this->name;
+        if (is_scalar($this->val)) {
+            return var_export($this->val, true);
+        }
+        return $this->val;
     }
 }
 
