@@ -38,6 +38,17 @@ class ArgumentListTest extends CodeGenTestCase
         }
     }
 
+    public function testArgumentListSetArguments()
+    {
+        $args = new ArgumentList;
+        $args->add(333);
+        $args->add(444);
+        $this->assertEquals(333, $args[0]);
+
+        $args->setArguments([ 111,222 ]);
+        $this->assertEquals(111, $args[0]);
+    }
+
     public function testArgumentListArrayAccess()
     {
         $args = new ArgumentList;
