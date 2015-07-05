@@ -8,6 +8,9 @@ use ArrayAccess;
 use IteratorAggregate;
 use ArrayIterator;
 
+/**
+ * Argument list for function call
+ */
 class ArgumentList implements Renderable, ArrayAccess, IteratorAggregate
 {
     public $arguments;
