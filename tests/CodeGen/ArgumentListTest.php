@@ -43,6 +43,9 @@ class ArgumentListTest extends CodeGenTestCase
         $args[] = 'bar';
         $this->assertEquals('bar', $args[3]);
 
+        $args[3] = 'zoo';
+        $this->assertEquals('zoo', $args[3]);
+
         unset($args[3]);
         $this->assertFalse( isset($args[3]) );
     }
