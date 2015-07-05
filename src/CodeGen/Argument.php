@@ -3,15 +3,28 @@ namespace CodeGen;
 use CodeGen\Renderable;
 use CodeGen\VariableDeflator;
 
+/**
+ * Method/Function argument
+ */
 class Argument implements Renderable
 {
-    public $name;
+    protected $name;
 
-    public $default;
+    protected $default;
 
     public function __construct($name, $default = NULL) {
         $this->name = $name;
         $this->default = $default;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getDefault()
+    {
+        return $this->default;
     }
 
     public function render(array $args = array()) {
