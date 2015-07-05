@@ -7,29 +7,32 @@ class Variable implements Renderable
 {
     protected $name;
 
-    protected $applyTemplate = false;
+    protected $templateApply = false;
+
+    protected $templateArgs = array();
 
     public function __construct($name)
     {
         $this->name = $name;
     }
 
-    public function setApplyTemplate($applyTemplate = true) 
+    public function templateApply(array $templateArgs = array())
     {
-        $this->applyTemplate = $applyTemplate;
+        $this->templateApply = true;
+        $this->templateArgs = $templateArgs;
     }
 
-    static public function template($name)
+    static public function template($name, array $args = array())
     {
         $var = new self($name);
-        $var->setApplyTemplate(true);
+        $var->templateApply($args);
         return $var;
     }
 
-    public function render(array $args = array()) 
+    public function render(array $args = array())
     {
-        if ($this->applyTemplate) {
-            return Utils::renderStringTemplate($this->name, $args);
+        if ($this->templateApply) {
+            return Utils::renderStringTemplate($this->name, array_merge($this->templateArgs, $args));
         }
         return $this->name;
     }
