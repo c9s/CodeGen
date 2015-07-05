@@ -34,12 +34,17 @@ class ArgumentListTest extends CodeGenTestCase
         $args->add(444);
         $args->add(array( 'foo' => 222 ));
 
+        $this->assertTrue( isset($args[0]) );
+
         $this->assertEquals(333, $args[0]);
         $this->assertEquals(444, $args[1]);
         $this->assertSame(array('foo' => 222), $args[2]);
 
         $args[] = 'bar';
         $this->assertEquals('bar', $args[3]);
+
+        unset($args[3]);
+        $this->assertFalse( isset($args[3]) );
     }
 }
 
