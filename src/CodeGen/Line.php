@@ -2,6 +2,10 @@
 namespace CodeGen;
 use CodeGen\Renderable;
 
+
+/**
+ * @codeCoverageIgnore
+ */
 abstract class Line implements Renderable {
 
     public $indentLevel = 0;
