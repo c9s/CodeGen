@@ -13,7 +13,7 @@ use ArrayIterator;
  */
 class ArgumentList implements Renderable, ArrayAccess, IteratorAggregate
 {
-    public $arguments;
+    protected $arguments;
 
     public function __construct(array $arguments = array()) 
     {
