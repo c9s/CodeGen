@@ -21,6 +21,8 @@ class ArgumentTest extends CodeGenTestCase
     public function testArgumentWithDefaultValue()
     {
         $a = new Argument('$foo', 333);
+        $this->assertEquals('$foo', $a->getName());
+        $this->assertEquals(333, $a->getDefault());
         $this->assertCodeEqualsFile('tests/data/argument_default.fixture', $a);
     }
 }
