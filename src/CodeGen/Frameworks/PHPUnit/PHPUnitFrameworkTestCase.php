@@ -13,7 +13,7 @@ class PHPUnitFrameworkTestCase extends UserClass
         $this->extendClass('PHPUnit_Framework_TestCase', true);
     }
 
-    public function addTest($testName) 
+    public function addTest($testName)
     {
         $methodName = 'test' . Inflector::classify($testName);
         $testMethod = new ClassMethod($methodName, array(), array());

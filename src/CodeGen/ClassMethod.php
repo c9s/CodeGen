@@ -23,11 +23,11 @@ class ClassMethod extends UserFunction implements Renderable, ArrayAccess
             ;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->render();
     }
 
-    
     public function offsetSet($offset,$value)
     {
         if (is_null($offset)) {

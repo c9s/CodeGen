@@ -16,13 +16,12 @@ class ClassName implements Renderable
             $className = substr($className,1);
         }
 
-        // found namespace
-        if( strpos( $className , '\\' ) != false ) {
+        // parse namespace
+        if (strpos($className , '\\') != false) {
             $p = explode('\\',ltrim($className, '\\'));
             $this->name = end($p);
             $this->namespace = join('\\',array_splice( $p , 0 , count($p) - 1 ));
-        }
-        else {
+        } else {
             $this->name = $className;
         }
     }
@@ -46,7 +45,8 @@ class ClassName implements Renderable
         return $this->getFullName();
     }
 
-    public function __toString() {
+    public function __toString() 
+    {
         return $this->render();
     }
 }
