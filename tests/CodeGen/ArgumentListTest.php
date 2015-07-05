@@ -27,6 +27,17 @@ class ArgumentListTest extends CodeGenTestCase
         $this->assertCodeEqualsFile('tests/data/argument_list_simple.fixture', $args);
     }
 
+    public function testArgumentListIterator()
+    {
+        $args = new ArgumentList;
+        $args->add(0);
+        $args->add(1);
+        $args->add(2);
+        foreach ($args as $idx => $a) {
+            $this->assertEquals($idx, $a);
+        }
+    }
+
     public function testArgumentListArrayAccess()
     {
         $args = new ArgumentList;
