@@ -3,6 +3,7 @@ CodeGen
 [![Latest Stable Version](https://poser.pugx.org/corneltek/codegen/v/stable)](https://packagist.org/packages/corneltek/codegen) 
 [![Total Downloads](https://poser.pugx.org/corneltek/codegen/downloads)](https://packagist.org/packages/corneltek/codegen) 
 [![Monthly Downloads](https://poser.pugx.org/corneltek/codegen/d/monthly)](https://packagist.org/packages/corneltek/codegen)
+[![Daily Downloads](https://poser.pugx.org/corneltek/codegen/d/daily)](https://packagist.org/packages/corneltek/codegen)
 [![Latest Unstable Version](https://poser.pugx.org/corneltek/codegen/v/unstable)](https://packagist.org/packages/corneltek/codegen) 
 [![License](https://poser.pugx.org/corneltek/codegen/license)](https://packagist.org/packages/corneltek/codegen)
 
