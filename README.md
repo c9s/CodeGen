@@ -1,5 +1,6 @@
 CodeGen
 ============================
+[![Build Status](https://travis-ci.org/c9s/CodeGen.svg?branch=master)](https://travis-ci.org/c9s/CodeGen)
 [![Latest Stable Version](https://poser.pugx.org/corneltek/codegen/v/stable)](https://packagist.org/packages/corneltek/codegen) 
 [![Total Downloads](https://poser.pugx.org/corneltek/codegen/downloads)](https://packagist.org/packages/corneltek/codegen) 
 [![Monthly Downloads](https://poser.pugx.org/corneltek/codegen/d/monthly)](https://packagist.org/packages/corneltek/codegen)
