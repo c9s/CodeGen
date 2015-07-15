@@ -1,21 +1,22 @@
 <?php
 namespace CodeGen\Statement;
 use CodeGen\Statement\Statement;
+use CodeGen\UseClass;
 use CodeGen\Renderable;
 
 class UseStatement extends Statement implements Renderable
 {
-    public $as;
-    public $class;
+    protected $as;
 
-    public function __construct($class, $as = null)
+    protected $class;
+
+    public function __construct($class,$as = null)
     {
         $this->class = ltrim( $class , '\\' );
         $this->as = $as ? ltrim($as,'\\') : null;
     }
 
-    public function getClassComponents()
-    {
+    public function getComponents() {
         return explode('\\', $this->class);
     }
 

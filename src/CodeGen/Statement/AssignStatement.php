@@ -7,16 +7,9 @@ use CodeGen\Renderable;
 
 class AssignStatement extends Statement implements Renderable
 {
-    protected $assignExpr;
-
     public function __construct($lvalue, $expr) 
     {
-        $this->assignExpr = new AssignExpr($lvalue, $expr);
-    }
-
-    public function render(array $args = array()) 
-    {
-        return $this->assignExpr->render($args) . ';';
+        $this->expr = new AssignExpr($lvalue, $expr);
     }
 }
 
