@@ -3,16 +3,19 @@ namespace CodeGen\Statement;
 use CodeGen\Renderable;
 use CodeGen\Line;
 
-class RequireStatement extends Line implements Renderable
+class RequireStatement extends Statement implements Renderable
 {
-    public $expr;
-
-    public function __construct(Renderable $expr) {
-        $this->expr = $expr;
+    public function __construct($file)
+    {
+        $this->expr = $file;
     }
 
     public function render(array $args = array()) {
-        return 'require ' . $this->expr->render($args) . ';';
+        if ($this->expr instanceof Renderable) {
+            return 'require ' . $this->expr->render($args) . ';';
+        } else {
+            return 'require ' . var_export($this->expr) . ';';
+        }
     }
 
 }
