@@ -18,7 +18,10 @@ class MethodCallExpr implements Renderable
 
     public $arguments;
 
-    public function __construct($objectName = '$this', $method = NULL, array $arguments = array()) {
+    protected $op = '->';
+
+    public function __construct($objectName = '$this', $method = NULL, array $arguments = array())
+    {
         $this->objectName = $objectName;
         if ($method) {
             $this->method = $method;
@@ -51,7 +54,7 @@ class MethodCallExpr implements Renderable
         } else {
             $out .= $this->objectName;
         }
-        $out .= '->' . $this->method . '(' . $this->arguments->render($args) . ')';
+        $out .= $this->op . $this->method . '(' . $this->arguments->render($args) . ')';
         return $out;
     }
 
