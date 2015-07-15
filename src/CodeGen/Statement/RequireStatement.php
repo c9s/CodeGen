@@ -14,7 +14,7 @@ class RequireStatement extends Statement implements Renderable
         if ($this->expr instanceof Renderable) {
             return 'require ' . $this->expr->render($args) . ';';
         } else {
-            return 'require ' . var_export($this->expr) . ';';
+            return 'require ' . var_export($this->expr,true) . ';';
         }
     }
 

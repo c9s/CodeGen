@@ -5,14 +5,12 @@ use CodeGen\Line;
 
 class RequireOnceStatement extends Line implements Renderable
 {
-    public $expr;
-
-    public function __construct(Renderable $expr) {
-        $this->expr = $expr;
-    }
-
     public function render(array $args = array()) {
-        return 'require_once ' . $this->expr->render($args) . ';';
+        if ($this->expr instanceof Renderable) {
+            return 'require_once ' . $this->expr->render($args) . ';';
+        } else {
+            return 'require_once ' . var_export($this->expr,true) . ';';
+        }
     }
 }
 
