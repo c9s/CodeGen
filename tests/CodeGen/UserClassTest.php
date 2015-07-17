@@ -14,7 +14,7 @@ class UserClassTest extends CodeGenTestCase
     public function testUserClassAddMethod()
     {
         $cls = new UserClass('FooClass');
-        $cls->addMethod('public', 'run', ['$a', '$b'], 'return $a + $b;');
+        $cls->addMethod('public', 'run', array('$a', '$b'), 'return $a + $b;');
         $this->assertCodeEqualsFile('tests/data/user_class_method.fixture', $cls);
     }
 }

@@ -9,7 +9,7 @@ class FunctionCallStatementTest extends CodeGenTestCase
 {
     public function testFunctionCallStatement()
     {
-        $stmt = new FunctionCallStatement('spl_autoload_register', []);
+        $stmt = new FunctionCallStatement('spl_autoload_register', array());
         $this->assertCodeEquals('spl_autoload_register();', $stmt);
     }
 }
