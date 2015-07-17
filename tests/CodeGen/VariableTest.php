@@ -20,7 +20,7 @@ class VariableTest extends CodeGenTestCase
 
     public function testVariableRenderTemplate()
     {
-        $var = Variable::template('${{ foo }}', [ 'foo' => 'bar' ]);
+        $var = Variable::template('${{ foo }}', array( 'foo' => 'bar' ));
         $this->assertCodeEqualsFile('tests/data/variable_template.fixture', $var);
     }
 }
