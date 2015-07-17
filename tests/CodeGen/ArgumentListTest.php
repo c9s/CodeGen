@@ -45,7 +45,7 @@ class ArgumentListTest extends CodeGenTestCase
         $args->add(444);
         $this->assertEquals(333, $args[0]);
 
-        $args->setArguments([ 111,222 ]);
+        $args->setArguments(array( 111,222 ));
         $this->assertEquals(111, $args[0]);
     }
 
