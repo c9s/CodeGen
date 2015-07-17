@@ -1,7 +1,14 @@
 CHANGELOG
 ==================
 
-Version 2.0.x
+Version 2.1
+-----------------
+- Added RequireStatement
+- Added RequireOnceStatement
+- Added MethodCallStatement
+- Added CallExpr
+
+Version 2.0
 -----------------
 
 MethodCallExpr
