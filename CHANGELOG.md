@@ -1,6 +1,10 @@
 CHANGELOG
 ==================
 
+Version 2.2
+-----------------
+- Added generatePsr0ClassUnder, generatePsr4ClassUnder methods for generating classes.
+
 Version 2.1
 -----------------
 - Added RequireStatement
