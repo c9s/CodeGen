@@ -217,6 +217,66 @@ class UserClass implements Renderable
         return join("\n", $lines);
     }
 
+    public function getPsr0ClassPath()
+    {
+        return str_replace('\\', DIRECTORY_SEPARATOR,$this->class->getFullName()) . '.php';
+    }
+
+    public function generateAt($path, array $args = array())
+    {
+        $code = "<?php\n" . $this->render($args);
+        if (file_put_contents($path, $code) === false) {
+            return false;
+        }
+        return $path;
+    }
+
+    public function generatePsr4ClassUnder($directory, array $args = array())
+    {
+        $code = "<?php\n" . $this->render($args);
+        $className = $this->class->name;
+        $path = $directory . DIRECTORY_SEPARATOR . $className . '.php';
+        if ($dir = dirname($path)) {
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
+        }
+        if (file_put_contents($path, $code) === false) {
+            return false;
+        }
+        return $path;
+    }
+
+    /**
+     * for Foo\Bar class,
+     *
+     * $this->generatePsr0ClassUnder('src');
+     *
+     * will generate class at src/Foo/Bar.php
+     */
+    public function generatePsr0ClassUnder($directory, array $args = array())
+    {
+        $code = "<?php\n" . $this->render($args);
+        $classPath = $this->getPsr0ClassPath();
+        $path = $directory . DIRECTORY_SEPARATOR . $classPath;
+        if ($dir = dirname($path)) {
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
+        }
+        if (file_put_contents($path, $code) === false) {
+            return false;
+        }
+        return $path;
+    }
+
+
+
+
+    /**
+     * This method was used for generating filename for class cache.
+     * SHOULD BE DEPRECATED
+     */
     public function getSplFilePath()
     {
         return str_replace('\\','_',$this->class->getFullName());
