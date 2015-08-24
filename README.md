@@ -63,6 +63,47 @@ $cls->generatePsr4ClassUnder('src/Zoo'); // This places 'My\Foo\Bar' at src/Zoo/
 ```
 
 
+## Generators
+
+### ArrayAccessGenerator
+
+```php
+$generator = new ArrayAccessGenerator;
+$userClass = new UserClass('MyZoo');
+$userClass->addPublicProperty('animals', array(
+    'tiger' => 'John',
+    'cat'   => 'Lisa',
+));
+$generator->generate('animals', $userClass);
+$userClass->requireAt('tests/generated/my_zoo.fixture');
+$zoo = new MyZoo;
+```
+
+### AppClassGenerator
+
+```php
+$foo = new FooClass(1,2);
+$generator = new AppClassGenerator(array(
+    'prefix' => 'OhMy',
+));
+
+$appClass = $generator->generate($foo);
+// echo $appClass->render();
+
+$this->assertCodeEqualsFile('tests/data/app_class_generator_ohmyfoo.fixture', $appClass);
+
+$path = $appClass->generatePsr4ClassUnder('tests/generated'); 
+$this->assertFileExists($path);
+require_once($path);
+
+$this->assertTrue(class_exists('OhMyFooClass'));
+
+$ohMyFoo = new OhMyFooClass;
+$this->assertEquals(1, $ohMyFoo->foo);
+```
+
+
+## Statements
 
 
 ### Generating `require_once` statement

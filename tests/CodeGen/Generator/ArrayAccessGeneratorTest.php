@@ -8,7 +8,6 @@ class ArrayAccessGeneratorTest extends PHPUnit_Framework_TestCase
     public function test()
     {
         $generator = new ArrayAccessGenerator;
-
         $userClass = new UserClass('MyZoo');
         $userClass->addPublicProperty('animals', array(
             'tiger' => 'John',
