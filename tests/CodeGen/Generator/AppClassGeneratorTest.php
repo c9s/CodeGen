@@ -1,5 +1,6 @@
 <?php
 use CodeGen\Generator\AppClassGenerator;
+use CodeGen\Testing\CodeGenTestCase;
 
 class FooClass
 {
@@ -19,7 +20,7 @@ class FooClass
 
 }
 
-class AppClassGeneratorTest extends PHPUnit_Framework_TestCase
+class AppClassGeneratorTest extends CodeGenTestCase
 {
     public function test()
     {
@@ -27,8 +28,11 @@ class AppClassGeneratorTest extends PHPUnit_Framework_TestCase
         $generator = new AppClassGenerator(array(
             'prefix' => 'OhMy',
         ));
+
         $appClass = $generator->generate($foo);
         // echo $appClass->render();
+
+        $this->assertCodeEqualsFile('tests/data/app_class_generator_ohmyfoo.fixture', $appClass);
 
         $path = $appClass->generatePsr4ClassUnder('tests/generated'); 
         $this->assertFileExists($path);

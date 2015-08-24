@@ -83,6 +83,13 @@ class UserClass implements Renderable
         }
     }
 
+    public function implementInterface($interface)
+    {
+        $class = new ClassName($interface);
+        $this->useClass($interface);
+        $this->interfaces[] = $class;
+    }
+
     public function implementClass($className)
     {
         $class = new ClassName($className);
@@ -220,6 +227,18 @@ class UserClass implements Renderable
     public function getPsr0ClassPath()
     {
         return str_replace('\\', DIRECTORY_SEPARATOR,$this->class->getFullName()) . '.php';
+    }
+
+
+    public function requireAt($path, array $args = array())
+    {
+        $code = "<?php\n" . $this->render($args);
+        if (file_put_contents($path, $code) === false) {
+            return false;
+        }
+        require $path;
+        return $path;
+
     }
 
     public function generateAt($path, array $args = array())

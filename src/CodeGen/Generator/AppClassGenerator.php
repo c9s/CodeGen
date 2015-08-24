@@ -26,6 +26,7 @@ class AppClassGenerator
         return is_array($value) || is_scalar($value) || is_null($value);
     }
 
+
     public function generate($object, UserClass $userClass = null)
     {
         $reflObject = new ReflectionObject($object);
