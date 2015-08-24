@@ -2,6 +2,10 @@
 namespace CodeGen\Generator;
 use CodeGen\UserClass;
 
+
+/**
+ * Unfinished
+ */
 class ArrayAccessGenerator
 {
     protected $class;
@@ -11,7 +15,7 @@ class ArrayAccessGenerator
         $this->class = $class;
     }
 
-    public function generate() 
+    public function generate($targetProperty, UserClass $class)
     {
         $class = $this->class;
         // $class->addMethod('public', 'offsetSet');

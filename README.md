@@ -10,15 +10,60 @@ CodeGen
 
 Transform your dynamic calls to static calls!
 
-### Generating class
+## UserClass
+
+### Creating UserClass
 
 ```php
 use CodeGen\UserClass;
-$cls = new UserClass('impl');
-$cls->implementClass('iface');
-$cls->addMethod( ...);
-$actual = $cls->render();
+$cls = new UserClass('FooClass');
+$code = $cls->render();
 ```
+
+### Implementing an interface
+
+```php
+$cls = new UserClass('FooClass');
+$cls->implementClass('iface');
+```
+
+### Adding properties
+
+```php
+$cls->addPublicProperty('foo');
+$cls->addPublicProperty('foo', 1);
+$cls->addPublicProperty('foo', ['foo','bar']);
+```
+
+
+```php
+$cls->addProtectedProperty('foo');
+$cls->addProtectedProperty('foo', 1);
+$cls->addProtectedProperty('foo', ['foo','bar']);
+```
+
+### Adding class methods
+
+```php
+$cls->addMethod('public','getName',[],['return $this->name;']);
+```
+
+```php
+$cls->addMethod('public','setName',['$name'],['$this->name = $name;']);
+```
+
+### Generating class file by PSR-0 or PSR-4
+
+```php
+$cls->generatePsr0ClassUnder('src'); // This places 'Foo\Bar' at src/Foo/Bar.php
+```
+
+```php
+$cls->generatePsr4ClassUnder('src/Zoo'); // This places 'My\Foo\Bar' at src/Zoo/Bar.php
+```
+
+
+
 
 ### Generating `require_once` statement
 
