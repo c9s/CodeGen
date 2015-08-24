@@ -24,7 +24,7 @@ $code = $cls->render();
 
 ```php
 $cls = new UserClass('FooClass');
-$cls->implementClass('iface');
+$class->implementInterface('ArrayAccess');
 ```
 
 ### Adding properties
