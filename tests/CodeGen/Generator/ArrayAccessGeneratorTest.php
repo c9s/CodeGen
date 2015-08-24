@@ -10,10 +10,10 @@ class ArrayAccessGeneratorTest extends PHPUnit_Framework_TestCase
         $generator = new ArrayAccessGenerator;
 
         $userClass = new UserClass('MyZoo');
-        $userClass->addPublicProperty('animals', [
+        $userClass->addPublicProperty('animals', array(
             'tiger' => 'John',
             'cat'   => 'Lisa',
-        ]);
+        ));
         $generator->generate('animals', $userClass);
 
         $userClass->requireAt('tests/generated/my_zoo.fixture');

@@ -24,18 +24,18 @@ class ArrayAccessGenerator
         $class->implementInterface('ArrayAccess');
 
         // $class->addProtectedProperty
-        $class->addMethod('public', 'offsetSet', ['$key','$val'], [
+        $class->addMethod('public', 'offsetSet', array('$key','$val'), array(
             "\$this->{$arrayPropertyName}[\$key] = \$val;"
-        ]);
-        $class->addMethod('public', 'offsetGet', ['$key'], [
+        ));
+        $class->addMethod('public', 'offsetGet', array('$key'), array(
             "return \$this->{$arrayPropertyName}[\$key];"
-        ]);
-        $class->addMethod('public', 'offsetExists', ['$key'], [
+        ));
+        $class->addMethod('public', 'offsetExists', array('$key'), array(
             "return isset(\$this->{$arrayPropertyName}[\$key]);",
-        ]);
-        $class->addMethod('public', 'offsetUnset', ['$key'], [
+        ));
+        $class->addMethod('public', 'offsetUnset', array('$key'), array(
             "unsetset(\$this->{$arrayPropertyName}[\$key]);",
-        ]);
+        ));
         return $class;
     }
 }
