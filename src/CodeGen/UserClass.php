@@ -4,12 +4,17 @@ use Exception;
 use ReflectionClass;
 use ReflectionObject;
 use CodeGen\ClassTrait;
+use CodeGen\ClassName;
 use CodeGen\Renderable;
 use CodeGen\BracketedBlock;
 use CodeGen\Indenter;
 
 class UserClass implements Renderable
 {
+
+    /**
+     * @var ClassName
+     */
     public $class;
 
     public $extends;
@@ -252,8 +257,27 @@ class UserClass implements Renderable
 
     public function generatePsr4ClassUnder($directory, array $args = array())
     {
-        $code = "<?php\n" . $this->render($args);
         $className = $this->class->name;
+
+        // translate psr4 class map to actual directory
+        if (is_array($directory)) {
+            $fullClassName = $this->class->getFullName();
+            foreach ($directory as $nsprefix => $nsdir) {
+                // found matched namesspace
+                if (strpos($fullClassName, $nsprefix) === 0) {
+                    $className = ltrim(substr($fullClassName, strlen($nsprefix)), '\\');
+                    $directory = rtrim($nsdir, DIRECTORY_SEPARATOR);
+                    continue;
+                }
+            }
+            if (is_array($directory)) {
+                throw new Exception("Can't translate class name into corresponding directory.");
+            }
+        }
+
+        $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+
+        $code = "<?php\n" . $this->render($args);
         $path = $directory . DIRECTORY_SEPARATOR . $className . '.php';
         if ($dir = dirname($path)) {
             if (!file_exists($dir)) {

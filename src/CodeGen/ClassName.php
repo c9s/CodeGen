@@ -5,6 +5,7 @@ use CodeGen\Renderable;
 class ClassName implements Renderable
 {
     public $name;
+
     public $namespace;
 
     public $root = false;
@@ -26,14 +27,40 @@ class ClassName implements Renderable
         }
     }
 
+
+    /**
+     * @return string return short class name
+     */
     public function getName()
     {
         return $this->name;
     }
 
+
+    /**
+     * This method followe ReflectionClass's interface.
+     *
+     * @return boolean return true if the class name is in namespace.
+     */
+    public function inNamespace()
+    {
+        return $this->namespace ? true : false;
+    }
+
+    /**
+     * This method followe ReflectionClass's interface
+     *
+     * @return string return namespace name
+     */
+    public function getNamespaceName()
+    {
+        return $this->namespace;
+    }
+
+
     public function getFullName()
     {
-        if ( $this->namespace ) {
+        if ($this->namespace) {
             return ($this->root ? '\\' : '') .  $this->namespace . '\\' . $this->name;
         } else {
             return ($this->root ? '\\' : '') . $this->name;
