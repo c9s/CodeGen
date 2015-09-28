@@ -5,6 +5,9 @@ use CodeGen\Line;
 
 class RequireComposerAutoloadStatement extends RequireStatement
 {
+    /**
+     * @param array $prefixes lookup prefixes
+     */
     public function __construct(array $prefixes = array())
     {
         $prefixes[] = getcwd();
