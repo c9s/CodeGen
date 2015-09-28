@@ -6,7 +6,7 @@ use CodeGen\Raw;
 use CodeGen\VariableDeflator;
 use LogicException;
 
-class MethodCallExpr implements Renderable
+class MethodCall implements Renderable
 {
     public $className;
 

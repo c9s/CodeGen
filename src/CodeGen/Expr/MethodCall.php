@@ -7,7 +7,7 @@ use CodeGen\VariableDeflator;
 use CodeGen\ArgumentList;
 use LogicException;
 
-class MethodCallExpr implements Renderable
+class MethodCall implements Renderable
 {
     /**
      * @var Variable|string

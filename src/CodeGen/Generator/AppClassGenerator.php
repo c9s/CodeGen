@@ -17,7 +17,8 @@ class AppClassGenerator
         $this->options = array_merge(array(
             'namespace' => null,
             'prefix' => 'App',
-            'property_filter' => ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED,
+            'reflection_property_filter' => ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED,
+            'property_filter' => null,
         ), $options);
     }
 
@@ -44,9 +45,14 @@ class AppClassGenerator
             $userClass->extendClass('\\' . $reflObject->getName(), false);
         }
 
-        $properties = $reflObject->getProperties($this->options['property_filter']);
+        $properties = $reflObject->getProperties($this->options['reflection_property_filter']);
+        $propertyFilter = $this->options['property_filter'];
         foreach ($properties as $reflProperty) {
             $reflProperty->setAccessible(true);
+
+            if ($propertyFilter && !$propertyFilter($reflProperty)) {
+                continue;
+            }
 
             $propertyName = $reflProperty->getName();
             $propertyValue = $reflProperty->getValue($object);

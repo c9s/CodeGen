@@ -15,12 +15,12 @@ Version 2.1
 Version 2.0
 -----------------
 
-MethodCallExpr
+MethodCall
 
 - `MethodCall` is now removed.
-- Changed `MethodCallExpr` default object name from `this` to `$this`. be sure to create MethodClass with '$this'
+- Changed `MethodCall` default object name from `this` to `$this`. be sure to create MethodClass with '$this'
 - Improve argument exporting.
-- Renamed `MethodCallExpr` to `MethodCallExpr`
+- Renamed `MethodCall` to `MethodCall`
 
 Statement
 
