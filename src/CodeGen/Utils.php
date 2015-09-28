@@ -4,25 +4,27 @@ use Twig_Loader_String;
 use Twig_Environment;
 use Closure;
 
+
+
 class Utils
 {
     static $stringloader = null;
+
     static $twig;
 
-    static public function renderStringTemplate($templateContent, array $args = array()) 
+    static public function renderStringTemplate($templateContent, array $args = array(), Twig_Environment $env = null)
     {
-        if (!self::$stringloader) {
-            self::$stringloader = new Twig_Loader_String();
+        if (!$env) {
+            $env = new Twig_Environment;
         }
-        if (!self::$twig) {
-            self::$twig = new Twig_Environment(self::$stringloader);
-        }
+        $template = $twig->createTemplate($templateContent);
+
         if (is_callable($args)) {
             $args = call_user_func($args);
         } elseif ($args instanceof Closure) {
             $args = $args();
         }
-        return self::$twig->render($templateContent, $args);
+        return $template->render($args);
     }
 
     static public function evalCallback($cb) 
