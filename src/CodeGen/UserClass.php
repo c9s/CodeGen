@@ -74,9 +74,15 @@ class UserClass implements Renderable
         $this->uses[] = new UseClass($className, $as);
     }
 
-    public function extendClass($className, $absolute = false)
+
+    /**
+     * Add extends property
+     *
+     * @param boolean $useAlias means append 'use' statement automatically.
+     */
+    public function extendClass($className, $useAlias = true)
     {
-        if ( $className[0] == '\\' || $absolute ) {
+        if ($className[0] == '\\' && $useAlias ) {
             $className = ltrim($className,'\\');
             $this->useClass($className);
 
