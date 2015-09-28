@@ -2,6 +2,7 @@
 namespace CodeGen;
 use CodeGen\Raw;
 use CodeGen\Exportable;
+use LogicException;
 
 class VariableDeflator
 {
@@ -19,6 +20,8 @@ class VariableDeflator
             return $class . '::__set_state(' . var_export($arg->__get_state(), true) . ')';
         } else if (is_array($arg) || method_exists($arg,"__set_state") || is_scalar($arg)) {
             return var_export($arg, true);
+        } else if ($arg === null) {
+            return '';
         } else {
             throw new LogicException("Can't deflate variable");
         }
