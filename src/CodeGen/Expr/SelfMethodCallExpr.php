@@ -7,12 +7,9 @@ use CodeGen\VariableDeflator;
 use LogicException;
 
 /**
- * This is a shorthand class for generating $this->foo( ... );
+ * Deprecated.
  */
-class SelfMethodCall extends MethodCall
+class SelfMethodCallExpr extends SelfMethodCall
 {
-    public function __construct($method = NULL, array $arguments = array()) {
-        parent::__construct('$this', $method, $arguments);
-    }
 }
 
