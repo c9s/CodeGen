@@ -15,6 +15,7 @@ class AppClassGenerator
     public function __construct(array $options = array())
     {
         $this->options = array_merge(array(
+            'namespace' => null,
             'prefix' => 'App',
             'property_filter' => ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED,
         ), $options);
@@ -33,12 +34,14 @@ class AppClassGenerator
 
         if (!$userClass) {
             $className = $this->options['prefix'] . $reflObject->getShortName();
-            if ($reflObject->inNamespace()) {
+            if (!$this->options['namespace'] && $reflObject->inNamespace()) {
                 $namespace = $reflObject->getNamespaceName();
-                $className = $namespace . '\\' . $className;
+                $className = '\\' . $namespace . '\\' . $className;
+            } else {
+                $className = $this->options['namespace'] . '\\' . $className;
             }
             $userClass = new UserClass($className);
-            $userClass->extendClass($reflObject->getName());
+            $userClass->extendClass('\\' . $reflObject->getName(), false);
         }
 
         $properties = $reflObject->getProperties($this->options['property_filter']);
