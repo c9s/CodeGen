@@ -18,7 +18,7 @@ class Utils
             if (self::$twig) {
                 $env = self::$twig;
             } else {
-                $env = new Twig_Environment(new Twig_Loader_Array([]));
+                $env = new Twig_Environment(new Twig_Loader_Array(array()));
             }
         }
         $template = $env->createTemplate($templateContent);
