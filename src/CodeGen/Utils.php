@@ -1,6 +1,6 @@
 <?php
 namespace CodeGen;
-use Twig_Loader_String;
+use Twig_Loader_Array;
 use Twig_Environment;
 use Closure;
 
@@ -15,9 +15,13 @@ class Utils
     static public function renderStringTemplate($templateContent, array $args = array(), Twig_Environment $env = null)
     {
         if (!$env) {
-            $env = new Twig_Environment;
+            if (self::$twig) {
+                $env = self::$twig;
+            } else {
+                $env = new Twig_Environment(new Twig_Loader_Array([]));
+            }
         }
-        $template = $twig->createTemplate($templateContent);
+        $template = $env->createTemplate($templateContent);
 
         if (is_callable($args)) {
             $args = call_user_func($args);
