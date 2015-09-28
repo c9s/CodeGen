@@ -1,5 +1,5 @@
 class OhMyFooClass
-    extends FooClass
+    extends \FooClass
 {
     public $foo = 1;
     protected $bar = 2;
