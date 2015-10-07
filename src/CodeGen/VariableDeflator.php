@@ -11,6 +11,8 @@ class VariableDeflator
         // Raw string output
         if (is_string($arg) && $arg[0] == '$') {
             return $arg;
+        } else if (is_string($arg)) {
+            return var_export($arg, true);
         } else if ($arg instanceof Renderable) {
             return $arg->render(array());
         } else if ($arg instanceof Raw) {
