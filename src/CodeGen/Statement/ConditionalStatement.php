@@ -16,13 +16,13 @@ class ConditionalStatement
 
     public function __construct($expr, $then, $elseBlock = null)
     {
-        $this->conditions[] = [$expr, $then];
+        $this->conditions[] = array($expr, $then);
         $this->elseBlock = $elseBlock;
     }
 
     public function when($expr, $then)
     {
-        $this->conditions[] = [$expr, $then];
+        $this->conditions[] = array($expr, $then);
     }
 
     public function render(array $args = array())
