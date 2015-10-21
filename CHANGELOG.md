@@ -1,6 +1,12 @@
 CHANGELOG
 ==================
 
+## Version 2.5
+
+- Added StaticMethodCall
+- Added IfIssetStatement
+- Added TryCatchStatement
+
 ## Version 2.4
 
 - Added RequireClassStatement
