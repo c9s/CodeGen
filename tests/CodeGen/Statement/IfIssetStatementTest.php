@@ -26,7 +26,7 @@ class IfIssetStatementTest extends CodeGenTestCase
     public function testIfIssetMultipleKeysStatement()
     {
         $foo = new Variable('$foo');
-        $ifFoo = new IfIssetStatement($foo, ['key', 'key2', 0], function() use ($foo) {
+        $ifFoo = new IfIssetStatement($foo, array('key', 'key2', 0), function() use ($foo) {
             $block = new Block;
             $block[] = new Statement(new AssignExpr($foo, new Constant(30)));
             return $block;
