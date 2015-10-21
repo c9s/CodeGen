@@ -112,7 +112,13 @@ $this->assertEquals(1, $ohMyFoo->foo);
 use CodeGen\Constant;
 use CodeGen\Statement\RequireOnceStatement;
 $varfile = new Constant('file.php');
-$requireStmt = new RequireStatement($varfile);
+$requireStmt = new RequireOnceStatement($varfile);
+```
+
+The code above generates:
+
+```php
+require_once 'file.php';
 ```
 
 ### Generating `require` statement
@@ -124,6 +130,14 @@ $varfile = new Constant('file.php');
 $requireStmt = new RequireStatement($varfile);
 ```
 
+The code above generates:
+
+```php
+require 'file.php';
+```
+
+
+
 ```php
 use CodeGen\Constant;
 use CodeGen\Variable;
@@ -131,4 +145,32 @@ use CodeGen\Statement\RequireStatement;
 $varfile = new Variable('$file');
 $requireStmt = new RequireStatement($varfile);
 ```
+
+The code above generates:
+
+```php
+require $file;
+```
+
+
+
+### Generating if isset statement condition
+
+```php
+$foo = new Variable('$foo');
+$ifFoo = new IfIssetStatement($foo, ['key', 'key2', 0], function() use ($foo) {
+    $block = new Block;
+    $block[] = new Statement(new AssignExpr($foo, new Constant(30)));
+    return $block;
+});
+```
+
+The code above generates:
+
+```php
+if (isset($foo['key']['key2'][0])) {
+    $foo = 30;
+}
+```
+
 
