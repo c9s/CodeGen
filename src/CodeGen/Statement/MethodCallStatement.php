@@ -1,9 +1,7 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Statement\Statement;
-use CodeGen\Expr\AssignExpr;
+
 use CodeGen\Expr\MethodCall;
-use CodeGen\VariableDeflator;
 use CodeGen\Renderable;
 
 class MethodCallStatement extends Statement implements Renderable

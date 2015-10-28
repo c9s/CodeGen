@@ -1,8 +1,8 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Renderable;
-use CodeGen\Line;
+
 use CodeGen\Expr\FunctionCall;
+use CodeGen\Renderable;
 
 class DefineStatement extends Statement implements Renderable
 {
@@ -11,7 +11,8 @@ class DefineStatement extends Statement implements Renderable
         $this->expr = new FunctionCall('define', [$symbol, $value]);
     }
 
-    public function render(array $args = array()) {
+    public function render(array $args = array())
+    {
         return $this->expr->render($args) . ';';
     }
 

@@ -1,7 +1,6 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Statement\Statement;
-use CodeGen\UseClass;
+
 use CodeGen\Renderable;
 
 class UseStatement extends Statement implements Renderable
@@ -10,13 +9,14 @@ class UseStatement extends Statement implements Renderable
 
     protected $class;
 
-    public function __construct($class,$as = null)
+    public function __construct($class, $as = null)
     {
-        $this->class = ltrim( $class , '\\' );
-        $this->as = $as ? ltrim($as,'\\') : null;
+        $this->class = ltrim($class, '\\');
+        $this->as = $as ? ltrim($as, '\\') : null;
     }
 
-    public function getComponents() {
+    public function getComponents()
+    {
         return explode('\\', $this->class);
     }
 

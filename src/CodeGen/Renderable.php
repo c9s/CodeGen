@@ -1,7 +1,8 @@
 <?php
 namespace CodeGen;
 
-interface Renderable { 
+interface Renderable
+{
     public function render(array $args = array());
 }
 

@@ -1,5 +1,6 @@
 <?php
-namespace CodeGEn\Exception;
+namespace CodeGen\Exception;
+
 use InvalidArgumentException;
 
 class InvalidArgumentTypeException extends InvalidArgumentException
@@ -8,7 +9,8 @@ class InvalidArgumentTypeException extends InvalidArgumentException
 
     public $givenType;
 
-    public function __construct($message, $givenVariable, array $expectingTypes = array()) {
+    public function __construct($message, $givenVariable, array $expectingTypes = array())
+    {
         parent::__construct($message);
         if (is_object($givenVariable)) {
             $this->givenType = get_class($givenVariable);

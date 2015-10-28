@@ -1,9 +1,8 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Statement\Statement;
+
 use CodeGen\Block;
 use CodeGen\Renderable;
-use CodeGen\VariableDeflator;
 use CodeGen\Utils;
 
 class ElseStatement extends Block implements Renderable
@@ -15,7 +14,7 @@ class ElseStatement extends Block implements Renderable
         $this->else = Utils::evalCallback($block);
     }
 
-    public function render(array $args = array()) 
+    public function render(array $args = array())
     {
         $this->else->setIndentLevel($this->indentLevel + 1);
         $this[] = ' else {';

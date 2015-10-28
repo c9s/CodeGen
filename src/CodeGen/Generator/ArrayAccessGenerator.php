@@ -1,5 +1,6 @@
 <?php
 namespace CodeGen\Generator;
+
 use CodeGen\UserClass;
 
 
@@ -24,7 +25,7 @@ class ArrayAccessGenerator
         $class->implementInterface('ArrayAccess');
 
         // $class->addProtectedProperty
-        $class->addMethod('public', 'offsetSet', array('$key','$val'), array(
+        $class->addMethod('public', 'offsetSet', array('$key', '$val'), array(
             "\$this->{$arrayPropertyName}[\$key] = \$val;"
         ));
         $class->addMethod('public', 'offsetGet', array('$key'), array(

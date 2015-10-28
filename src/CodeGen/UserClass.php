@@ -1,13 +1,7 @@
 <?php
 namespace CodeGen;
+
 use Exception;
-use ReflectionClass;
-use ReflectionObject;
-use CodeGen\ClassTrait;
-use CodeGen\ClassName;
-use CodeGen\Renderable;
-use CodeGen\BracketedBlock;
-use CodeGen\Indenter;
 
 class UserClass implements Renderable
 {
@@ -25,7 +19,7 @@ class UserClass implements Renderable
 
     public $methods = array();
 
-    public $consts  = array();
+    public $consts = array();
 
     public $properties = array();
 
@@ -44,7 +38,7 @@ class UserClass implements Renderable
      * @param string $className
      *
      * a sample options:
-     * 
+     *
      * $t = new ClassDeclare('NewClassFoo')
      *
      */
@@ -55,7 +49,7 @@ class UserClass implements Renderable
 
     public function setClass($className)
     {
-        $this->class = new ClassName( $className );
+        $this->class = new ClassName($className);
     }
 
     public function useClass($className, $as = null)
@@ -82,11 +76,11 @@ class UserClass implements Renderable
      */
     public function extendClass($className, $useAlias = true)
     {
-        if ($className[0] == '\\' && $useAlias ) {
-            $className = ltrim($className,'\\');
+        if ($className[0] === '\\' && $useAlias) {
+            $className = ltrim($className, '\\');
             $this->useClass($className);
 
-            $_p = explode('\\',$className);
+            $_p = explode('\\', $className);
             $shortClassName = end($_p);
             $this->extends = new ClassName($shortClassName);
         } else {
@@ -121,9 +115,9 @@ class UserClass implements Renderable
         $this->methods[$method->getName()] = $method;
     }
 
-    public function addConst($name,$value)
+    public function addConst($name, $value)
     {
-        $this->consts[] = new ClassConst($name,$value);
+        $this->consts[] = new ClassConst($name, $value);
     }
 
     public function addConstObject(ClassConst $const)
@@ -131,9 +125,10 @@ class UserClass implements Renderable
         $this->consts[] = $const;
     }
 
-    public function addConsts($array) {
-        foreach( $array as $name => $value ) {
-            $this->consts[] = new ClassConst($name,$value);
+    public function addConsts($array)
+    {
+        foreach ($array as $name => $value) {
+            $this->consts[] = new ClassConst($name, $value);
         }
     }
 
@@ -159,12 +154,11 @@ class UserClass implements Renderable
     }
 
 
-    public function addStaticVar($name, $value, $scope = 'public') 
+    public function addStaticVar($name, $value, $scope = 'public')
     {
         $this->staticVars[] = new ClassStaticVariable($name, $value, $scope);
         return $this;
     }
-
 
 
     /**
@@ -172,7 +166,7 @@ class UserClass implements Renderable
      *
      * @return string short class name
      */
-    public function getShortClassName() 
+    public function getShortClassName()
     {
         return $this->class->getName();
     }
@@ -191,7 +185,7 @@ class UserClass implements Renderable
 
         // When there is no namespace, we should skip the first-level class use statement.
         if ($this->uses) {
-            foreach($this->uses as $u) {
+            foreach ($this->uses as $u) {
                 // If we are not in a namespace, just skip these one component use statement
                 if (!$this->class->namespace && count($u->getComponents()) == 1) {
                     continue;
@@ -205,39 +199,39 @@ class UserClass implements Renderable
             $lines[] = Indenter::indent(1) . 'extends ' . $this->extends->render();
         }
         if ($this->interfaces) {
-            $lines[] = Indenter::indent(1) . 'implements ' . join(', ', array_map(function($class) { 
-                return $class->name;
-            }, $this->interfaces));
+            $lines[] = Indenter::indent(1) . 'implements ' . implode(', ', array_map(function ($class) {
+                    return $class->name;
+                }, $this->interfaces));
         }
 
         $block = new BracketedBlock;
-        foreach($this->traits as $trait) {
+        foreach ($this->traits as $trait) {
             $block[] = $trait;
         }
 
-        foreach($this->consts as $const) {
+        foreach ($this->consts as $const) {
             $block[] = $const;
         }
 
-        foreach($this->staticVars as $var) {
+        foreach ($this->staticVars as $var) {
             $block[] = $var;
         }
 
-        foreach($this->properties as $property) {
+        foreach ($this->properties as $property) {
             $block[] = $property;
         }
 
-        foreach($this->methods as $method) {
+        foreach ($this->methods as $method) {
             $method->getBlock()->setIndentLevel(1);
             $block[] = $method;
         }
         $lines[] = $block->render($args);
-        return join("\n", $lines);
+        return implode("\n", $lines);
     }
 
     public function getPsr0ClassPath()
     {
-        return str_replace('\\', DIRECTORY_SEPARATOR,$this->class->getFullName()) . '.php';
+        return str_replace('\\', DIRECTORY_SEPARATOR, $this->class->getFullName()) . '.php';
     }
 
 
@@ -320,27 +314,27 @@ class UserClass implements Renderable
     }
 
 
-
-
     /**
      * This method was used for generating filename for class cache.
      * SHOULD BE DEPRECATED
      */
     public function getSplFilePath()
     {
-        return str_replace('\\','_',$this->class->getFullName());
+        return str_replace('\\', '_', $this->class->getFullName());
     }
 
-    public function addTrait(ClassTrait $trait) {
+    public function addTrait(ClassTrait $trait)
+    {
         $this->traits[] = $trait;
     }
 
-    public function useTrait($class) {
+    public function useTrait($class)
+    {
         $classes = func_get_args();
         $self = $this;
-        $classes = array_map(function($fullClassName) use($self) {
+        $classes = array_map(function ($fullClassName) use ($self) {
             // split classnames into "use" statement 
-            $p = explode('\\',ltrim($fullClassName,'\\'));
+            $p = explode('\\', ltrim($fullClassName, '\\'));
             $className = end($p);
             if (count($p) > 1) {
                 $this->useClass($fullClassName);

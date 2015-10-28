@@ -1,11 +1,9 @@
 <?php
 namespace CodeGen\Expr;
-use Exception;
-use CodeGen\Renderable;
-use CodeGen\Raw;
-use CodeGen\VariableDeflator;
+
 use CodeGen\ArgumentList;
-use LogicException;
+use CodeGen\Renderable;
+use CodeGen\Variable;
 
 class MethodCall implements Renderable
 {
@@ -29,7 +27,7 @@ class MethodCall implements Renderable
         $this->arguments = new ArgumentList($arguments);
     }
 
-    public function method($name) 
+    public function method($name)
     {
         $this->method = $name;
         return $this;
@@ -40,13 +38,14 @@ class MethodCall implements Renderable
         $this->arguments = new ArgumentList($args);
     }
 
-    public function addArgument($arg) 
+    public function addArgument($arg)
     {
         $this->arguments[] = $arg;
         return $this;
     }
 
-    public function render(array $args = array()) {
+    public function render(array $args = array())
+    {
         $out = '';
 
         if ($this->objectName instanceof Renderable) {
@@ -58,10 +57,11 @@ class MethodCall implements Renderable
         return $out;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->render();
     }
-    
+
 }
 
 
