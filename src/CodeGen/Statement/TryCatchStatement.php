@@ -17,7 +17,7 @@ class TryCatchStatement extends Block implements Renderable
     public function __construct($catchClass = '\Exception', $catchClassAlias = '$e', $tryBlock = NULL, $throwBlock = NULL)
     {
         $this->catchClass = $catchClass;
-        $this->catchClass = $catchClassAlias;
+        $this->catchClassAlias = $catchClassAlias;
         if ($tryBlock) {
             $this->tryBlock = Utils::evalCallback($tryBlock);
         } else {
@@ -37,7 +37,7 @@ class TryCatchStatement extends Block implements Renderable
 
         $this[] = 'try {';
         $this[] = $this->tryBlock;
-        $this[] = 'catch  (' . $this->catchClass . ' ' . $this->catchClassAlias . ') {';
+        $this[] = '}catch  (' . $this->catchClass . ' ' . $this->catchClassAlias . ') {';
         $this[] = $this->throwBlock;
         $this[] = '}';
 
