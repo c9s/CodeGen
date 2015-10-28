@@ -14,7 +14,7 @@ class TryCatchStatement extends Block implements Renderable
     /**
      * @var Block
      */
-    public $throwBlock;
+    public $catchBlock;
     /**
      * @var string
      */
@@ -24,7 +24,7 @@ class TryCatchStatement extends Block implements Renderable
      */
     protected $catchClassAlias;
 
-    public function __construct($catchClass = '\Exception', $catchClassAlias = '$e', $tryBlock = NULL, $throwBlock = NULL)
+    public function __construct($catchClass = '\Exception', $catchClassAlias = '$e', $tryBlock = NULL, $catchBlock = NULL)
     {
         parent::__construct();
         $this->catchClass = $catchClass;
@@ -34,22 +34,22 @@ class TryCatchStatement extends Block implements Renderable
         } else {
             $this->tryBlock = new Block();
         }
-        if ($throwBlock) {
-            $this->throwBlock = Utils::evalCallback($throwBlock);
+        if ($catchBlock) {
+            $this->catchBlock = Utils::evalCallback($catchBlock);
         } else {
-            $this->throwBlock = new Block();
+            $this->catchBlock = new Block();
         }
     }
 
     public function render(array $args = array())
     {
         $this->tryBlock->setIndentLevel($this->indentLevel + 1);
-        $this->throwBlock->setIndentLevel($this->indentLevel + 1);
+        $this->catchBlock->setIndentLevel($this->indentLevel + 1);
 
         $this->lines[] = 'try {';
         $this->lines[] = $this->tryBlock;
         $this->lines[] = '}catch  (' . $this->catchClass . ' ' . $this->catchClassAlias . ') {';
-        $this->lines[] = $this->throwBlock;
+        $this->lines[] = $this->catchBlock;
         $this->lines[] = '}';
 
         return parent::render($args);
