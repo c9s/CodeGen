@@ -3,6 +3,11 @@ namespace CodeGen;
 
 class Raw
 {
+    /**
+     * @var string
+     */
+    protected $code;
+
     public function __construct($code)
     {
         $this->code = $code;
@@ -10,7 +15,7 @@ class Raw
 
     public function __toString()
     {
-        return $this->code;
+        return (string)$this->code;
     }
 }
 
