@@ -4,7 +4,7 @@ namespace CodeGen\Expr;
 use CodeGen\ArgumentList;
 use CodeGen\Renderable;
 
-class StaticMethodCallExpr implements Renderable
+class StaticMethodCall implements Renderable
 {
     public $className;
 
