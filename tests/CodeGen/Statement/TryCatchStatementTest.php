@@ -15,9 +15,9 @@ class TryCatchStatementTest extends CodeGenTestCase
     public function testTryCatch()
     {
         $tryCatch = new TryCatchStatement();
-        $tryCatch->tryBlock->appendLine('$x =1;');
 
-        $tryCatch->throwBlock->appendLine('throw $e');
+        $tryCatch->tryBlock->appendLine('$x =1;');
+        $tryCatch->catchBlock->appendLine('throw $e');
 
         $this->assertCodeEqualsFile('tests/data/try_catch.fixture', $tryCatch);
     }
