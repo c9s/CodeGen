@@ -1,9 +1,5 @@
 <?php
 namespace CodeGen;
-use CodeGen\Block;
-use CodeGen\BracketedBlock;
-use CodeGen\Renderable;
-use CodeGen\Indenter;
 
 class UserFunction extends Block implements Renderable
 {
@@ -30,7 +26,7 @@ class UserFunction extends Block implements Renderable
      * @param string $body the code of the function.
      * @param array $bodyArguments the template arguments of the code of the function.
      */
-    public function __construct($name, array $arguments = array(), $body = '', array $bodyArguments = array() )
+    public function __construct($name, array $arguments = array(), $body = '', array $bodyArguments = array())
     {
         $this->name = $name;
         $this->arguments = $arguments;
@@ -49,15 +45,18 @@ class UserFunction extends Block implements Renderable
         return $this->name;
     }
 
-    public function setIndentLevel($level) {
+    public function setIndentLevel($level)
+    {
         $this->indentLevel = $level;
     }
 
-    public function increaseIndentLevel() {
+    public function increaseIndentLevel()
+    {
         $this->indentLevel++;
     }
 
-    public function decreaseIndentLevel() {
+    public function decreaseIndentLevel()
+    {
         $this->indentLevel--;
     }
 
@@ -67,23 +66,25 @@ class UserFunction extends Block implements Renderable
         $this->block = $block;
     }
 
-    public function getBlock() {
+    public function getBlock()
+    {
         return $this->block;
     }
 
-    public function setArguments(array $args) 
+    public function setArguments(array $args)
     {
         $this->arguments = $args;
     }
 
-    protected function renderArguments() 
+    protected function renderArguments()
     {
-        return join(', ', $this->arguments);
+        return implode(', ', $this->arguments);
     }
 
-    public function render(array $args = array()) {
+    public function render(array $args = array())
+    {
         return 'function ' . $this->name . '(' . $this->renderArguments() . ")\n"
-            . $this->block->render($args);
+        . $this->block->render($args);
     }
 
 }

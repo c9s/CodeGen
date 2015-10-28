@@ -7,15 +7,26 @@ use CodeGen\Utils;
 
 class TryCatchStatement extends Block implements Renderable
 {
-    protected $catchClass;
-    protected $catchClassAlias;
-
+    /**
+     * @var Block
+     */
     public $tryBlock;
+    /**
+     * @var Block
+     */
     public $throwBlock;
-
+    /**
+     * @var string
+     */
+    protected $catchClass;
+    /**
+     * @var string
+     */
+    protected $catchClassAlias;
 
     public function __construct($catchClass = '\Exception', $catchClassAlias = '$e', $tryBlock = NULL, $throwBlock = NULL)
     {
+        parent::__construct();
         $this->catchClass = $catchClass;
         $this->catchClassAlias = $catchClassAlias;
         if ($tryBlock) {
@@ -35,11 +46,11 @@ class TryCatchStatement extends Block implements Renderable
         $this->tryBlock->setIndentLevel($this->indentLevel + 1);
         $this->throwBlock->setIndentLevel($this->indentLevel + 1);
 
-        $this[] = 'try {';
-        $this[] = $this->tryBlock;
-        $this[] = '}catch  (' . $this->catchClass . ' ' . $this->catchClassAlias . ') {';
-        $this[] = $this->throwBlock;
-        $this[] = '}';
+        $this->lines[] = 'try {';
+        $this->lines[] = $this->tryBlock;
+        $this->lines[] = '}catch  (' . $this->catchClass . ' ' . $this->catchClassAlias . ') {';
+        $this->lines[] = $this->throwBlock;
+        $this->lines[] = '}';
 
         return parent::render($args);
     }

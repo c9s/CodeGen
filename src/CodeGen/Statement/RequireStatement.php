@@ -1,7 +1,7 @@
 <?php
 namespace CodeGen\Statement;
+
 use CodeGen\Renderable;
-use CodeGen\Line;
 
 class RequireStatement extends Statement implements Renderable
 {
@@ -10,11 +10,12 @@ class RequireStatement extends Statement implements Renderable
         $this->expr = $file;
     }
 
-    public function render(array $args = array()) {
+    public function render(array $args = array())
+    {
         if ($this->expr instanceof Renderable) {
             return 'require ' . $this->expr->render($args) . ';';
         } else {
-            return 'require ' . var_export($this->expr,true) . ';';
+            return 'require ' . var_export($this->expr, true) . ';';
         }
     }
 

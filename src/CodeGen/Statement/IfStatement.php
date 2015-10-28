@@ -1,11 +1,10 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Statement\Statement;
-use CodeGen\Statement\ElseIfStatement;
+
 use CodeGen\Block;
 use CodeGen\Renderable;
-use CodeGen\VariableDeflator;
 use CodeGen\Utils;
+use CodeGen\VariableDeflator;
 
 class IfStatement extends Block implements Renderable
 {
@@ -34,7 +33,7 @@ class IfStatement extends Block implements Renderable
      * @param Expr $condition
      * @param Block $block
      */
-    public function elif($condition, $block) 
+    public function elif($condition, $block)
     {
         $this->elseifs[] = new ElseIfStatement($condition, $block);
         return $this;
@@ -42,17 +41,18 @@ class IfStatement extends Block implements Renderable
 
     public function __call($method, $args)
     {
-        if ($method == "else") {
+        if ($method === 'else') {
             return $this->_else($args[0]);
         }
     }
 
-    public function _else($block) {
+    public function _else($block)
+    {
         $this->else = new ElseStatement($block);
         return $this;
     }
 
-    public function render(array $args = array()) 
+    public function render(array $args = array())
     {
         $this->if->setIndentLevel($this->indentLevel + 1);
         $this[] = 'if (' . VariableDeflator::deflate($this->condition) . ') {';
@@ -60,15 +60,15 @@ class IfStatement extends Block implements Renderable
 
         $trailingBlocks = array();
         if (!empty($this->elseifs)) {
-            foreach($this->elseifs as $elseIf) {
+            foreach ($this->elseifs as $elseIf) {
                 $trailingBlocks[] = rtrim($elseIf->render($args));
             }
         }
         if ($this->else) {
             $trailingBlocks[] = rtrim($this->else->render($args));
         }
-        
-        $this[] = '}' . join('',$trailingBlocks);
+
+        $this[] = '}' . join('', $trailingBlocks);
         return parent::render($args);
     }
 

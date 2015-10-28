@@ -1,12 +1,9 @@
 <?php
 namespace CodeGen;
-use Exception;
-use CodeGen\Renderable;
-use CodeGen\Raw;
-use CodeGen\VariableDeflator;
+
 use ArrayAccess;
-use IteratorAggregate;
 use ArrayIterator;
+use IteratorAggregate;
 
 /**
  * Argument list for function call
@@ -15,7 +12,7 @@ class ArgumentList implements Renderable, ArrayAccess, IteratorAggregate
 {
     protected $arguments;
 
-    public function __construct(array $arguments = array()) 
+    public function __construct(array $arguments = array())
     {
         $this->arguments = $arguments;
     }
@@ -25,23 +22,23 @@ class ArgumentList implements Renderable, ArrayAccess, IteratorAggregate
         $this->arguments = $args;
     }
 
-    public function add($arg) 
+    public function add($arg)
     {
         $this->arguments[] = $arg;
         return $this;
     }
-    
-    
+
+
     public function offsetExists($offset)
     {
-        return isset($this->arguments[ $offset ]);
+        return isset($this->arguments[$offset]);
     }
-    
+
     public function offsetGet($offset)
     {
-        return $this->arguments[ $offset ];
+        return $this->arguments[$offset];
     }
-    
+
     public function offsetUnset($offset)
     {
         unset($this->arguments[$offset]);
@@ -67,7 +64,7 @@ class ArgumentList implements Renderable, ArrayAccess, IteratorAggregate
         foreach ($this->arguments as $arg) {
             $strs[] = VariableDeflator::deflate($arg);
         }
-        return join(', ',$strs);
+        return implode(', ', $strs);
     }
 }
 

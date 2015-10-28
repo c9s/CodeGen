@@ -1,14 +1,10 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Statement\Statement;
-use CodeGen\Expr\AssignExpr;
-use CodeGen\VariableDeflator;
-use CodeGen\Renderable;
-use CodeGen\Exception\InvalidArgumentTypeException;
 
-class ConditionalStatement
-    extends Statement
-    implements Renderable
+use CodeGen\Exception\InvalidArgumentTypeException;
+use CodeGen\Renderable;
+
+class ConditionalStatement extends Statement implements Renderable
 {
     protected $conditions = array();
 
@@ -49,7 +45,7 @@ class ConditionalStatement
                 } else if ($code instanceof Renderable) {
                     return $code->render($args);
                 } else {
-                    throw new InvalidArgumentTypeException("Unsupported line object type", $line, array('string', 'Renderable'));
+                    throw new InvalidArgumentTypeException('Unsupported line object type', $code, array('string', 'Renderable'));
                 }
             }
         }
@@ -60,10 +56,10 @@ class ConditionalStatement
             } else if ($this->elseBlock instanceof Renderable) {
                 return $this->elseBlock->render($args);
             } else {
-                throw new InvalidArgumentTypeException("Unsupported line object type", $line, array('string', 'Renderable'));
+                throw new InvalidArgumentTypeException('Unsupported line object type', $this->elseBlock, array('string', 'Renderable'));
             }
         }
-        return $output;
+        return $ret;
     }
 }
 

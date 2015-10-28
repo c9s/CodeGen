@@ -1,16 +1,16 @@
 <?php
 namespace CodeGen;
-use Twig_Loader_Array;
-use Twig_Environment;
-use Closure;
 
+use Closure;
+use Twig_Environment;
+use Twig_Loader_Array;
 
 
 class Utils
 {
-    static $stringloader = null;
+    protected static $stringloader;
 
-    static $twig;
+    protected static $twig;
 
     static public function renderStringTemplate($templateContent, array $args = array(), Twig_Environment $env = null)
     {
@@ -31,7 +31,7 @@ class Utils
         return $template->render($args);
     }
 
-    static public function evalCallback($cb) 
+    static public function evalCallback($cb)
     {
         return is_callable($cb) ? $cb() : $cb;
     }

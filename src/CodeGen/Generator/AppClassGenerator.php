@@ -1,11 +1,11 @@
 <?php
 namespace CodeGen\Generator;
-use ReflectionClass;
+
+use CodeGen\UserClass;
 use ReflectionObject;
 use ReflectionProperty;
-use CodeGen\UserClass;
 
-/** 
+/**
  * Generate UserClass for applciation based on the runtime object.
  */
 class AppClassGenerator

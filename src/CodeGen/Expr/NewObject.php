@@ -1,11 +1,8 @@
 <?php
 namespace CodeGen\Expr;
-use Exception;
-use CodeGen\Renderable;
-use CodeGen\Raw;
-use CodeGen\VariableDeflator;
+
 use CodeGen\ArgumentList;
-use LogicException;
+use CodeGen\Renderable;
 
 class NewObject implements Renderable
 {
@@ -13,7 +10,8 @@ class NewObject implements Renderable
 
     public $arguments;
 
-    public function __construct($className, array $arguments = array()) {
+    public function __construct($className, array $arguments = array())
+    {
         $this->className = $className;
         $this->arguments = new ArgumentList($arguments);
     }
@@ -23,7 +21,7 @@ class NewObject implements Renderable
         $this->arguments = new ArgumentList($args);
     }
 
-    public function addArgument($arg) 
+    public function addArgument($arg)
     {
         $this->arguments[] = $arg;
         return $this;
