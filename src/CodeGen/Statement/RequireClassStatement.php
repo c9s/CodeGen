@@ -1,7 +1,6 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Renderable;
-use CodeGen\Line;
+
 use ReflectionClass;
 
 class RequireClassStatement extends RequireStatement

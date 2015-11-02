@@ -1,7 +1,5 @@
 <?php
 namespace CodeGen;
-use CodeGen\Renderable;
-use CodeGen\Utils;
 
 class Variable implements Renderable
 {

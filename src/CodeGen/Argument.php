@@ -1,7 +1,5 @@
 <?php
 namespace CodeGen;
-use CodeGen\Renderable;
-use CodeGen\VariableDeflator;
 
 /**
  * Method/Function argument
@@ -12,7 +10,8 @@ class Argument implements Renderable
 
     protected $default;
 
-    public function __construct($name, $default = NULL) {
+    public function __construct($name, $default = NULL)
+    {
         $this->name = $name;
         $this->default = $default;
     }
@@ -27,10 +26,11 @@ class Argument implements Renderable
         return $this->default;
     }
 
-    public function render(array $args = array()) {
+    public function render(array $args = array())
+    {
         $code = $this->name;
         if ($this->default) {
-            $code .= ' = ' .  VariableDeflator::deflate($this->default);
+            $code .= ' = ' . VariableDeflator::deflate($this->default);
         }
         return $code;
     }

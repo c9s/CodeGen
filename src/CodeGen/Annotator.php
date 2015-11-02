@@ -1,13 +1,16 @@
 <?php
 namespace CodeGen;
-use CodeGen\Comment;
-use CodeGen\CommentBlock;
 
-trait Annotator {  
+trait Annotator
+{
 
+    /**
+     * @var Comment|CommentBlock
+     */
     public $comment;
 
-    public function annotate($comment) {
+    public function annotate($comment)
+    {
         $lines = explode("\n", $comment);
         if (count($lines) === 0) {
             return;

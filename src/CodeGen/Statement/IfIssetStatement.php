@@ -1,13 +1,9 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Statement\Statement;
-use CodeGen\Statement\ElseIfStatement;
-use CodeGen\Statement\IfStatement;
-use CodeGen\Block;
+
 use CodeGen\Renderable;
-use CodeGen\VariableDeflator;
-use CodeGen\Utils;
 use CodeGen\Variable;
+use CodeGen\VariableDeflator;
 
 class ArrayIssetExpr implements Renderable
 {
@@ -18,7 +14,7 @@ class ArrayIssetExpr implements Renderable
     public function __construct(Variable $var, $keys)
     {
         $this->var = $var;
-        $this->keys = (array) $keys;
+        $this->keys = (array)$keys;
     }
 
     public function render(array $args = array())

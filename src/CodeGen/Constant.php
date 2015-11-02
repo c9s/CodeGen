@@ -1,6 +1,5 @@
 <?php
 namespace CodeGen;
-use CodeGen\Renderable;
 
 class Constant implements Renderable
 {
@@ -11,7 +10,7 @@ class Constant implements Renderable
         $this->val = $val;
     }
 
-    public function render(array $args = array()) 
+    public function render(array $args = array())
     {
         if (is_scalar($this->val)) {
             return var_export($this->val, true);

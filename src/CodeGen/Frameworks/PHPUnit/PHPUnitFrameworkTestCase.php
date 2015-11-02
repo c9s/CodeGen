@@ -1,14 +1,15 @@
 <?php
 namespace CodeGen\Frameworks\PHPUnit;
+
+use CodeGen\ClassMethod;
 use CodeGen\UserClass;
 use Doctrine\Common\Inflector\Inflector;
-use CodeGen\ClassMethod;
 
 class PHPUnitFrameworkTestCase extends UserClass
 {
-    public function __construct($title) 
+    public function __construct($title)
     {
-        $class = Inflector::classify(preg_replace('/\W+/',' ',$title));
+        $class = Inflector::classify(preg_replace('/\W+/', ' ', $title));
         parent::__construct($class);
         $this->extendClass('PHPUnit_Framework_TestCase', true);
     }

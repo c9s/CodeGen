@@ -1,8 +1,7 @@
 <?php
 namespace CodeGen\Statement;
-use CodeGen\Statement\Statement;
+
 use CodeGen\Expr\CallExpr;
-use CodeGen\VariableDeflator;
 use CodeGen\Renderable;
 
 class FunctionCallStatement extends Statement implements Renderable

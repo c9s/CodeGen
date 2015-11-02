@@ -1,14 +1,15 @@
 <?php
 namespace CodeGen;
-use CodeGen\Renderable;
 
 
 /**
  * @codeCoverageIgnore
  */
-abstract class Line implements Renderable {
+abstract class Line implements Renderable
+{
 
     public $indentLevel = 0;
+
 
     public $content;
 
@@ -17,15 +18,18 @@ abstract class Line implements Renderable {
         $this->content = $content;
     }
 
-    public function setIndentLevel($level) {
+    public function setIndentLevel($level)
+    {
         $this->indentLevel = $level;
     }
 
-    public function increaseIndentLevel() {
+    public function increaseIndentLevel()
+    {
         $this->indentLevel++;
     }
 
-    public function decreaseIndentLevel() {
+    public function decreaseIndentLevel()
+    {
         $this->indentLevel--;
     }
 

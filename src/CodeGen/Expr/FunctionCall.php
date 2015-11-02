@@ -1,14 +1,12 @@
 <?php
 namespace CodeGen\Expr;
-use Exception;
-use CodeGen\Renderable;
-use CodeGen\Raw;
-use CodeGen\VariableDeflator;
+
 use CodeGen\ArgumentList;
-use LogicException;
+use CodeGen\Renderable;
+use CodeGen\Variable;
 
 /**
- * CallExpr is basically the same thing as method call, 
+ * CallExpr is basically the same thing as method call,
  * but it allows you to change the method call operator.
  */
 class FunctionCall implements Renderable
@@ -46,7 +44,7 @@ class FunctionCall implements Renderable
     {
         return $this->render();
     }
-    
+
 }
 
 
