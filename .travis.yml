@@ -13,6 +13,7 @@ before_script:
 - phpenv rehash
 script:
   - phpunit -c phpunit.xml.dist
+  - php bin/codegen archive --no-compress --app-bootstrap codegen.phar && php codegen.phar
 after_success:
 - php vendor/bin/coveralls -v
 cache:
