@@ -9,7 +9,8 @@
         "twig/twig": "^1 >=1.21"
     },
     "require-dev": {
-        "corneltek/phpunit-testmore": "dev-master"
+        "corneltek/phpunit-testmore": "dev-master",
+        "corneltek/cliframework": "dev-master"
     },
     "license": "MIT",
     "authors": [
