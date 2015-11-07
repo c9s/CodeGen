@@ -36,6 +36,12 @@ class ClassName implements Renderable
     }
 
 
+    public function setNamespace($ns)
+    {
+        $this->namespace = $ns;
+        return $this;
+    }
+
     /**
      * This method followe ReflectionClass's interface.
      *
