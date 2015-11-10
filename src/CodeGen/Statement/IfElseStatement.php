@@ -12,29 +12,28 @@ class IfElseStatement extends IfStatement implements Renderable
 
     protected $elifs = array();
 
-    public function __construct(Renderable $condition, $ifblock = NULL, $else = NULL)
+    public function __construct(Renderable $condition, $ifBlock = NULL, $elseBlock = NULL)
     {
-        parent::__construct($condition, $ifblock);
+        parent::__construct($condition, $ifBlock);
 
-        if ($else) {
-            $this->else = Utils::evalCallback($else);
+        if ($elseBlock) {
+            $this->else = Utils::evalCallback($elseBlock);
+        } else {
+            $this->else = new Block;
         }
     }
 
     public function render(array $args = array())
     {
         $this->if->setIndentLevel($this->indentLevel + 1);
+        $this->else->setIndentLevel($this->indentLevel + 1);
+
         $this[] = 'if (' . VariableDeflator::deflate($this->condition) . ') {';
         $this[] = $this->if;
+        $this[] = '} else {';
+        $this[] = $this->else;
+        $this[] = '}';
 
-        if ($this->else) {
-            $this[] = '} else {';
-            $this->else->setIndentLevel($this->indentLevel + 1);
-            $this[] = $this->else;
-            $this[] = '}';
-        } else {
-            $this[] = '}';
-        }
         return Block::render($args);
     }
 }
