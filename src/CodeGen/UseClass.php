@@ -23,7 +23,7 @@ class UseClass extends Statement implements Renderable
     {
         $code = 'use ' . $this->class;
         if ($this->as) {
-            $code .= ' ' . $this->as;
+            $code .= ' as ' . $this->as;
         }
         return $code . ';';
     }
