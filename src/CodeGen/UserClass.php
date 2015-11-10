@@ -52,6 +52,13 @@ class UserClass implements Renderable
         $this->class = new ClassName($className);
     }
 
+    public function in($namespace)
+    {
+        $this->class->setNamespace($namespace);
+        return $this;
+    }
+
+
     public function useClass($className, $as = null)
     {
         if ($as) {
