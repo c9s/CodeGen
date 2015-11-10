@@ -1,4 +1,4 @@
-foreach($iterator as $key => $item){
+foreach ($iterator as $key => $item) {
     $item;
     $key;
 }
