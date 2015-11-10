@@ -9,11 +9,18 @@ class PHPUnitFrameworkTestCaseTest extends CodeGenTestCase
 {
     public function testGeneratingTestCase()
     {
-        $testCase = new PHPUnitFrameworkTestCase('MyAppTest');
+        $testCase = new PHPUnitFrameworkTestCase('My App Test');
         $testCase->addTest('arrayIsNotEmpty');
         $this->assertCodeEqualsFile('tests/data/frameworks/phpunit/phpunit_testcase.fixture', $testCase);
     }
 
+    public function testTestCaseWithNamespace()
+    {
+        $testCase = new PHPUnitFrameworkTestCase('My App Ns Test');
+        $testCase->in('SomeNamespace');
+        $testCase->addTest('arrayIsNotEmpty');
+        $this->assertCodeEqualsFile('tests/data/frameworks/phpunit/phpunit_testcase_ns.fixture', $testCase);
+    }
 
     public function testGeneratingTestCaseWithAssertions()
     {
