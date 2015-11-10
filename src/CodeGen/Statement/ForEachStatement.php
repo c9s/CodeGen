@@ -36,9 +36,9 @@ class ForEachStatement extends Block implements Renderable
         $this->forEachBlock->setIndentLevel($this->indentLevel + 1);
 
         if ($this->keyVariable) {
-            $this->lines[] = 'foreach(' . $this->forVariable . ' as ' . $this->keyVariable . ' => ' . $this->asVariable . '){';
+            $this->lines[] = 'foreach (' . $this->forVariable . ' as ' . $this->keyVariable . ' => ' . $this->asVariable . ') {';
         } else {
-            $this->lines[] = 'foreach(' . $this->forVariable . ' as ' . $this->asVariable . '){';
+            $this->lines[] = 'foreach (' . $this->forVariable . ' as ' . $this->asVariable . ') {';
         }
 
         $this->lines[] = $this->forEachBlock;
