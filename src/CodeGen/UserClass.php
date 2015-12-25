@@ -25,6 +25,12 @@ class UserClass implements Renderable
 
     public $staticVars = array();
 
+
+    /**
+     * @var boolean final class?
+     */
+    public $final;
+
     /**
      * Registered trait
      */
@@ -201,7 +207,11 @@ class UserClass implements Renderable
             }
         }
 
-        $lines[] = 'class ' . $this->class->name;
+        $classDeclare = ($this->final ? 'final ' : '')
+            . 'class ' . $this->class->name
+            ;
+
+        $lines[] = $classDeclare;
         if ($this->extends) {
             $lines[] = Indenter::indent(1) . 'extends ' . $this->extends->render();
         }
@@ -241,6 +251,10 @@ class UserClass implements Renderable
         return str_replace('\\', DIRECTORY_SEPARATOR, $this->class->getFullName()) . '.php';
     }
 
+    public function makeFinal()
+    {
+        $this->final = true;
+    }
 
     public function requireAt($path, array $args = array())
     {
