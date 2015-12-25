@@ -1,6 +1,19 @@
 CHANGELOG
 ==================
 
+## Version 2.7
+
+- Added ability to make class final.
+- if - else statement , should always contain else block even if no arg provided.
+- forEach statement.
+- Added AppClassGenerator.
+- Added object property expression.
+
+## Version 2.6
+
+- Implemented try catch statement
+- Added StaticMethodCall
+
 ## Version 2.5
 
 - Added StaticMethodCall
