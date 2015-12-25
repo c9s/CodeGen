@@ -2,7 +2,7 @@
     "name": "corneltek/codegen",
     "homepage": "http://github.com/c9s/CodeGen",
     "description": "PHP Code Generation Library",
-    "version": "2.6.0",
+    "version": "2.7.0",
     "require": {
         "php": ">=5.3.0",
         "doctrine/inflector": "*",
