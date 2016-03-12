@@ -18,16 +18,13 @@ class ConstStatement extends Statement implements Renderable
 
     public function render(array $args = array())
     {
-        $out = 'CONST ';
-        $out .= $this->symbol;
-        $out .= ' ';
+        $out = 'CONST ' . $this->symbol .  ' = ';
         if ($this->value instanceof Renderable) {
             $out .= $this->value->render($args);
         } else {
             $out .= $this->value;
         }
-        $out .= ';';
-        return $out;
+        return $out . ';';
     }
 
 }
