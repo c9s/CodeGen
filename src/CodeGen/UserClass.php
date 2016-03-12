@@ -298,6 +298,7 @@ class UserClass implements Renderable
 
         $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
 
+        // TODO: import copyright text
         $code = "<?php\n" . $this->render($args);
         $path = $directory . DIRECTORY_SEPARATOR . $className . '.php';
         if ($dir = dirname($path)) {
