@@ -19,6 +19,7 @@
             "homepage": "http://c9s.me"
         }
     ],
+    "extra": { "branch-alias": { "dev-master": "2.8.x-dev" } },
     "autoload": {
         "psr-4": {
             "CodeGen\\": "src/CodeGen/"
