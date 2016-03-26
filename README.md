@@ -10,6 +10,29 @@ CodeGen
 
 Transform your dynamic calls to static calls!
 
+## Expressions
+
+### ConcatExpr
+
+```php
+$concat = new ConcatExpr('foo1', 'bar2');
+$concat // 'foo1' . 'bar2'
+```
+
+### AssignExpr
+
+```php
+$assign = new AssignExpr('$foo', 10);
+echo $assign; // $foo = 10
+```
+
+### Wrapping Expr with Statement object
+
+```php
+$statement = new Statement($assign);
+echo $statement; // $foo = 10;
+```
+
 ## UserClass
 
 ### Creating UserClass
