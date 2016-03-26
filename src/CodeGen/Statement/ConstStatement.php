@@ -3,6 +3,7 @@ namespace CodeGen\Statement;
 
 use CodeGen\Expr\FunctionCall;
 use CodeGen\Renderable;
+use CodeGen\VariableDeflator;
 
 class ConstStatement extends Statement implements Renderable
 {
@@ -22,7 +23,7 @@ class ConstStatement extends Statement implements Renderable
         if ($this->value instanceof Renderable) {
             $out .= $this->value->render($args);
         } else {
-            $out .= var_export($this->value, true);
+            $out .= VariableDeflator::deflate($this->value, true);
         }
         return $out . ';';
     }
