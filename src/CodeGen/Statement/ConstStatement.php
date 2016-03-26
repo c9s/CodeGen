@@ -22,7 +22,7 @@ class ConstStatement extends Statement implements Renderable
         if ($this->value instanceof Renderable) {
             $out .= $this->value->render($args);
         } else {
-            $out .= $this->value;
+            $out .= var_export($this->value, true);
         }
         return $out . ';';
     }
