@@ -6,7 +6,7 @@ use CodeGen\VariableDeflator;
 
 class ConcatExpr implements Renderable
 {
-    protected $subexprs = [];
+    protected $subexprs = array();
 
     public function __construct()
     {
@@ -15,7 +15,7 @@ class ConcatExpr implements Renderable
 
     public function render(array $args = array())
     {
-        $outs = [];
+        $outs = array();
         foreach ($this->subexprs as $expr) {
             $outs[] = VariableDeflator::deflate($expr);
         }
