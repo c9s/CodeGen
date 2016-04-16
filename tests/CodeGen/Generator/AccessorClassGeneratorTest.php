@@ -3,6 +3,7 @@ use CodeGen\Testing\CodeGenTestCase;
 use CodeGen\Generator\AccessorClassGenerator;
 use CodeGen\Frameworks\Apache2\VirtualHostDirectiveGroup;
 use CodeGen\Frameworks\Apache2\DirectoryDirectiveGroup;
+use CodeGen\Frameworks\Apache2\DirectoryMatchDirectiveGroup;
 
 class AccessorClassGeneratorTest extends CodeGenTestCase
 {
@@ -27,6 +28,10 @@ class AccessorClassGeneratorTest extends CodeGenTestCase
         $appClass = $g->generate(new DirectoryDirectiveGroup('tmp'), 'Directory');
         $appClass->generatePsr4ClassUnder('src/CodeGen/Frameworks/Apache2/');
         $this->assertCodeEqualsFile('tests/data/frameworks/apache2/directory.fixture', $appClass);
+
+        $appClass = $g->generate(new DirectoryMatchDirectiveGroup('^/var/www/combined/(?<sitename>[^/]+)'), 'DirectoryMatch');
+        $appClass->generatePsr4ClassUnder('src/CodeGen/Frameworks/Apache2/');
+        $this->assertCodeEqualsFile('tests/data/frameworks/apache2/directory_match.fixture', $appClass);
     }
 
 }

@@ -36,15 +36,6 @@ class DirectoryDirectiveGroup extends BaseDirectiveGroup
         $this->path = $path;
         parent::__construct('Directory');
     }
-
-    public function generate() {
-        $out = [];
-        $out[] = "<{$this->tag}>";
-        $this->buildDynamicDirectives($this->dynamicDirectives);
-        $out[] = "</{$this->tag}>";
-        return join("\n",$out);
-    }
-
 }
 
 
