@@ -30,11 +30,13 @@ class AccessorClassGenerator
     }
 
 
-    protected function buildUserClassFromObject($object)
+    protected function buildUserClassFromObject($object, $userClass = null)
     {
         $reflObject = new ReflectionObject($object);
 
-        if (isset($this->options['class_name'])) {
+        if (is_string($userClass)) {
+            $className = $userClass;
+        } else if (isset($this->options['class_name'])) {
             $className = $this->options['class_name'];
         } else if (isset($this->options['prefix'])) {
             $className = $this->options['prefix'] . $reflObject->getShortName();
@@ -53,10 +55,10 @@ class AccessorClassGenerator
         return $userClass;
     }
 
-    public function generate($object, UserClass $userClass = null)
+    public function generate($object, $userClass = null)
     {
-        if (!$userClass) {
-            $userClass = $this->buildUserClassFromObject($object);
+        if (!$userClass instanceof UserClass) {
+            $userClass = $this->buildUserClassFromObject($object, $userClass);
         }
 
         $reflObject = new ReflectionObject($object);

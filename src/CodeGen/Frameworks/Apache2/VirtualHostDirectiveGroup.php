@@ -1,10 +1,7 @@
 <?php
 namespace CodeGen\Frameworks\Apache2;
 
-class VirtualHostProperties {
-
-
-
+class VirtualHostDirectiveGroup extends BaseDirectiveGroup {
 
     /**
      * @var string
@@ -99,6 +96,7 @@ class VirtualHostProperties {
 
     public function __construct($bindHost = '*', $bindPort = 80)
     {
+        parent::__construct('VirtualHost');
         $this->bindHost = $bindHost;
         $this->bindPort = $bindPort;
     }
@@ -118,7 +116,7 @@ class VirtualHostProperties {
     public function generate()
     {
         $out = [];
-        $out[] = "<VirtualHost {$this->bindHost}:{$this->bindPort}>";
+        $out[] = "<{$this->tag} {$this->bindHost}:{$this->bindPort}>";
         if ($this->serverName) {
             $out[] = "ServerName {$this->serverName}";
         }
@@ -153,10 +151,11 @@ class VirtualHostProperties {
                     $out[] = $directive;
                 }
             }
-
-
         }
-        $out[] = "</VirtualHost>";
+
+        $this->buildDynamicDirectives($this->dynamicDirectives);
+
+        $out[] = "</{$this->tag}>";
         return join("\n", $out);
     }
 

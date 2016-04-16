@@ -1,5 +1,6 @@
+<?php
 namespace CodeGen\Frameworks\Apache2;
-class AppVirtualHostDirectiveGroup
+class VirtualHost
     extends \CodeGen\Frameworks\Apache2\VirtualHostDirectiveGroup
 {
     public function setDocumentRoot($entry)
