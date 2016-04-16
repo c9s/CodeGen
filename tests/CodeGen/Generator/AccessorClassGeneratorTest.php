@@ -18,7 +18,7 @@ class AccessorClassGeneratorTest extends CodeGenTestCase
     {
         $g = new AccessorClassGenerator([
             'namespace' => 'CodeGen\Frameworks\Apache2',
-            'class_name' => 'ApacheSiteConfig',
+            'class_name' => 'VirtualHostConfig',
         ]);
         $appClass = $g->generate(new VirtualHostProperties);
         $appClass->generatePsr4ClassUnder('src/CodeGen/Frameworks/Apache2/');

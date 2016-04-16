@@ -3,6 +3,9 @@ namespace CodeGen\Frameworks\Apache2;
 
 class VirtualHostProperties {
 
+
+
+
     /**
      * @var string
      * @synthesize
@@ -14,6 +17,18 @@ class VirtualHostProperties {
      * @synthesize
      */
     protected $serverName;
+
+    /**
+     * @var string
+     * @synthesize
+     */
+    protected $serverAdmin;
+
+    /**
+     * @var string
+     * @synthesize
+     */
+    protected $serverPath;
 
 
     /**
@@ -64,5 +79,25 @@ class VirtualHostProperties {
      * @synthesize
      */
     protected $rewriteRules;
+
+    /**
+     * @var string[string]
+     * @synthesize
+     */
+    protected $env;
+
+    protected $bindHost;
+
+    protected $bindPort;
+
+    public function __construct($bindHost = '*', $bindPort = 80)
+    {
+        $this->bindHost = $bindHost;
+        $this->bindPort = $bindPort;
+    }
+
+
+
+
 }
 

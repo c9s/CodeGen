@@ -19,9 +19,16 @@ class AccessorClassGenerator
             'namespace' => null,
             'prefix' => 'App',
             'reflection_property_filter' => ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED,
+            'scalar_type_hint' => false,
             'property_filter' => null,
         ), $options);
     }
+
+    protected function isScalarType($typeName)
+    {
+        return in_array($typeName, ['string', 'int', 'boolean', 'double', 'float']);
+    }
+
 
     protected function buildUserClassFromObject($object)
     {
@@ -62,47 +69,73 @@ class AccessorClassGenerator
                 continue;
             }
 
-            if ($propertyName = $reflProperty->getName()) {
-                $docComment = $reflProperty->getDocComment();
-                if (!preg_match('/@synthesize/', $docComment)) {
-                    continue;
+            $propertyName = $reflProperty->getName();
+
+            $docComment = $reflProperty->getDocComment();
+            if (!preg_match('/@synthesize/', $docComment)) {
+                continue;
+            }
+
+            $propertyNameVar = new Variable('$' . $propertyName);
+
+            if (preg_match('/@var (\w+)\[\]/',$docComment, $matches)) {
+                $methodName = 'add' . Inflector::classify(Inflector::singularize($propertyName));
+                $userClass->addMethod('public', $methodName, ["\$entry"], [ 
+                    "\$this->{$propertyName}[] = \$entry;",
+                ]);
+
+                $methodName = 'remove' . Inflector::classify(Inflector::singularize($propertyName));
+                $userClass->addMethod('public', $methodName, ["\$entry"], [ 
+                    "\$pos = array_search(\$entry, \$this->{$propertyName}, true);",
+                    "if (\$pos !== -1) {",
+                    "    unset(\$this->{$propertyName}[\$pos]);",
+                    "    return true;",
+                    "}",
+                    "return false;"
+                ]);
+            } else if (preg_match('/@var (\w+)\[(\w+)\]/',$docComment, $matches)) {
+                $keyTypeHint = $matches[1];
+                $valueTypeHint = $matches[2];
+
+                if (!$this->options['scalar_type_hint']) {
+                    if ($this->isScalarType($keyTypeHint)) {
+                        $keyTypeHint = null;
+                    }
+                    if ($this->isScalarType($valueTypeHint)) {
+                        $valueTypeHint = null;
+                    }
                 }
 
-
-                $propertyIsArray = false;
-                if (preg_match('/@var (string)\[\]/',$docComment)) {
-                    $propertyIsArray = true;
-                    // push value
-                    $methodName = 'add' . Inflector::classify(Inflector::singularize($propertyName));
-                    $userClass->addMethod('public', $methodName, [$propertyNameVar], [ 
-                        "\$this->{$propertyName}[] = " . $propertyNameVar . ';',
-                    ]);
-
-                    // push value
-                    $methodName = 'remove' . Inflector::classify(Inflector::singularize($propertyName));
-                    $userClass->addMethod('public', $methodName, [$propertyNameVar], [ 
-                        "\$pos = array_search($propertyNameVar, \$this->{$propertyName}, true);",
-                        "if (\$pos !== -1) {",
-                        "    unset(\$this->{$propertyName}[\$pos]);",
-                        "    return true;",
-                        "}",
-                        "return false;"
-                    ]);
-                }
-
-                // Add scalar setter and getter
-                $setterName = 'set' . Inflector::classify($propertyName);
-                $getterName = 'get' . Inflector::classify($propertyName);
-
-                $propertyNameVar = new Variable('$' . $propertyName);
-                $userClass->addMethod('public', $setterName, [$propertyNameVar], [ 
-                    "\$this->$propertyName = " . $propertyNameVar . ';',
+                $methodName = 'add' . Inflector::classify(Inflector::singularize($propertyName));
+                $userClass->addMethod('public', $methodName, [
+                    join(' ',array_filter([$keyTypeHint, '$key'])),
+                    join(' ',array_filter([$valueTypeHint,'$entry'])),
+                ],[ 
+                    "\$this->{$propertyName}[\$key] = \$entry;",
                 ]);
-                $userClass->addMethod('public', $getterName, [], [ 
-                    "return \$this->$propertyName;",
+
+                $methodName = 'remove' . Inflector::classify(Inflector::singularize($propertyName));
+                $userClass->addMethod('public', $methodName, [
+                    join(' ',array_filter([$keyTypeHint, '$key'])),
+                ], [ 
+                    "unset(\$this->{$propertyName}[\$key]);",
+                    "return true;"
                 ]);
+
+
 
             }
+
+            // Add scalar setter and getter
+            $setterName = 'set' . Inflector::classify($propertyName);
+            $getterName = 'get' . Inflector::classify($propertyName);
+
+            $userClass->addMethod('public', $setterName, [$propertyNameVar], [ 
+                "\$this->$propertyName = " . $propertyNameVar . ';',
+            ]);
+            $userClass->addMethod('public', $getterName, [], [ 
+                "return \$this->$propertyName;",
+            ]);
         }
         return $userClass;
     }
