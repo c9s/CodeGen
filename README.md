@@ -197,3 +197,32 @@ if (isset($foo['key']['key2'][0])) {
 ```
 
 
+## Framework Generators
+
+### PHPUnit TestCase Generator
+
+### Apache Config Generator
+
+```php
+use CodeGen\Generator\AccessorClassGenerator;
+use CodeGen\Frameworks\Apache2\VirtualHostProperties;
+$g = new AccessorClassGenerator([
+    'prefix' => 'App',
+]);
+$appClass = $g->generate(new VirtualHostProperties);
+$appClass->generatePsr4ClassUnder('src/CodeGen/Frameworks/Apache2/');
+```
+
+```php
+use CodeGen\Generator\AccessorClassGenerator;
+use CodeGen\Frameworks\Apache2\VirtualHostProperties;
+$g = new AccessorClassGenerator([
+    'namespace' => 'CodeGen\Frameworks\Apache2',
+    'class_name' => 'ApacheSiteConfig',
+]);
+$appClass = $g->generate(new VirtualHostProperties);
+$appClass->generatePsr4ClassUnder('src/CodeGen/Frameworks/Apache2/');
+```
+
+
+
