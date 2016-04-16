@@ -78,7 +78,9 @@ class AccessorClassGenerator
 
             $propertyNameVar = new Variable('$' . $propertyName);
 
+            $isArrayProperty = false;
             if (preg_match('/@var (\w+)\[\]/',$docComment, $matches)) {
+                $isArrayProperty = true;
                 $methodName = 'add' . Inflector::classify(Inflector::singularize($propertyName));
                 $userClass->addMethod('public', $methodName, ["\$entry"], [ 
                     "\$this->{$propertyName}[] = \$entry;",
@@ -94,6 +96,7 @@ class AccessorClassGenerator
                     "return false;"
                 ]);
             } else if (preg_match('/@var (\w+)\[(\w+)\]/',$docComment, $matches)) {
+                $isArrayProperty = true;
                 $keyTypeHint = $matches[1];
                 $valueTypeHint = $matches[2];
 
@@ -130,9 +133,15 @@ class AccessorClassGenerator
             $setterName = 'set' . Inflector::classify($propertyName);
             $getterName = 'get' . Inflector::classify($propertyName);
 
-            $userClass->addMethod('public', $setterName, [$propertyNameVar], [ 
-                "\$this->$propertyName = " . $propertyNameVar . ';',
-            ]);
+            if ($isArrayProperty) {
+                $userClass->addMethod('public', $setterName, ['array $entries'], [ 
+                    "\$this->$propertyName = \$entries;",
+                ]);
+            } else {
+                $userClass->addMethod('public', $setterName, ['$entry'], [ 
+                    "\$this->$propertyName = \$entry;",
+                ]);
+            }
             $userClass->addMethod('public', $getterName, [], [ 
                 "return \$this->$propertyName;",
             ]);
