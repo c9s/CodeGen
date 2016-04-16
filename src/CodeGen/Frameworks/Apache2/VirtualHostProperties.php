@@ -111,7 +111,7 @@ class VirtualHostProperties {
 
     public function addRewriteRule($pattern, $substitution, $flags = "")
     {
-        $this->rewriteDirectives[] = "RewriteRulte $pattern $substitution $flags";
+        $this->rewriteDirectives[] = "RewriteRule $pattern $substitution $flags";
         return $this;
     }
 
