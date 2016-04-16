@@ -101,10 +101,10 @@ class AccessorClassGenerator
                 $valueTypeHint = $matches[2];
 
                 if (!$this->options['scalar_type_hint']) {
-                    if ($this->isScalarType($keyTypeHint)) {
+                    if ($this->isScalarType($keyTypeHint) || ctype_lower($keyTypeHint)) {
                         $keyTypeHint = null;
                     }
-                    if ($this->isScalarType($valueTypeHint)) {
+                    if ($this->isScalarType($valueTypeHint) || ctype_lower($valueTypeHint)) {
                         $valueTypeHint = null;
                     }
                 }

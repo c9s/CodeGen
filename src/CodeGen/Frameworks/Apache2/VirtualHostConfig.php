@@ -48,9 +48,9 @@ class VirtualHostConfig
         }
         return false;
     }
-    public function setServerAliases(array $entry)
+    public function setServerAliases(array $entries)
     {
-        $this->serverAliases = $entry;
+        $this->serverAliases = $entries;
     }
     public function getServerAliases()
     {
@@ -104,26 +104,34 @@ class VirtualHostConfig
     {
         return $this->rewriteEngine;
     }
-    public function addRewriteRule($entry)
+    public function setRewriteBase($entry)
     {
-        $this->rewriteRules[] = $entry;
+        $this->rewriteBase = $entry;
     }
-    public function removeRewriteRule($entry)
+    public function getRewriteBase()
     {
-        $pos = array_search($entry, $this->rewriteRules, true);
+        return $this->rewriteBase;
+    }
+    public function addRewriteDirective($entry)
+    {
+        $this->rewriteDirectives[] = $entry;
+    }
+    public function removeRewriteDirective($entry)
+    {
+        $pos = array_search($entry, $this->rewriteDirectives, true);
         if ($pos !== -1) {
-            unset($this->rewriteRules[$pos]);
+            unset($this->rewriteDirectives[$pos]);
             return true;
         }
         return false;
     }
-    public function setRewriteRules(array $entry)
+    public function setRewriteDirectives(array $entries)
     {
-        $this->rewriteRules = $entry;
+        $this->rewriteDirectives = $entries;
     }
-    public function getRewriteRules()
+    public function getRewriteDirectives()
     {
-        return $this->rewriteRules;
+        return $this->rewriteDirectives;
     }
     public function addEnv($key, $entry)
     {
@@ -134,9 +142,9 @@ class VirtualHostConfig
         unset($this->env[$key]);
         return true;
     }
-    public function setEnv(array $entry)
+    public function setEnv(array $entries)
     {
-        $this->env = $entry;
+        $this->env = $entries;
     }
     public function getEnv()
     {
