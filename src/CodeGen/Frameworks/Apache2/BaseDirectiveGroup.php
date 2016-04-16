@@ -20,6 +20,10 @@ class BaseDirectiveGroup
         return $this;
     }
 
+    public function addDirective($directive)
+    {
+        $this->dynamicDirectives[] = $directive;
+    }
 
     protected function buildDynamicDirectives(array &$out)
     {
