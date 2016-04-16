@@ -34,6 +34,11 @@ class Variable implements Renderable
         }
         return $this->name;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
 
 

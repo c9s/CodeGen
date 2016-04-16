@@ -1,0 +1,25 @@
+<?php
+class MyZoo
+    implements ArrayAccess
+{
+    public $animals = array (
+      'tiger' => 'John',
+      'cat' => 'Lisa',
+    );
+    public function offsetSet($key, $val)
+    {
+        $this->animals[$key] = $val;
+    }
+    public function offsetGet($key)
+    {
+        return $this->animals[$key];
+    }
+    public function offsetExists($key)
+    {
+        return isset($this->animals[$key]);
+    }
+    public function offsetUnset($key)
+    {
+        unsetset($this->animals[$key]);
+    }
+}
