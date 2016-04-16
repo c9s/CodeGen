@@ -113,49 +113,36 @@ class VirtualHostDirectiveGroup extends BaseDirectiveGroup {
         return $this;
     }
 
-    public function generate()
+    public function generate($level = 0)
     {
         $out = [];
-        $out[] = "<{$this->tag} {$this->bindHost}:{$this->bindPort}>";
-        if ($this->serverName) {
-            $out[] = "ServerName {$this->serverName}";
-        }
-        if ($this->serverPath) {
-            $out[] = "ServerPath {$this->serverPath}";
-        }
-        if ($this->serverAdmin) {
-            $out[] = "ServerAdmin {$this->serverAdmin}";
-        }
-        if (!empty($this->serverAliases)) {
-            $out[] = "ServerAlias " . join(' ', (array) $this->serverAliases);
-        }
-        if ($this->documentRoot) {
-            $out[] = "DocumentRoot " . $this->documentRoot;
-        }
-        if ($this->errorLog) {
-            $out[] = "ErrorLog " . $this->errorLog;
-        }
-        if ($this->customLog) {
-            $out[] = "CustomLog " . $this->customLog;
-        }
+        $out[] = str_repeat('  ', $level) . "<{$this->tag} {$this->bindHost}:{$this->bindPort}>";
+
+        $level++;
+
+        $this->outputDirective($out, $level, "ServerName", $this->serverName);
+        $this->outputDirective($out, $level, "ServerPath", $this->serverPath);
+        $this->outputDirective($out, $level, "ServerAdmin", $this->serverAdmin);
+        $this->outputDirective($out, $level, "ServerAlias", $this->serverAliases);
+        $this->outputDirective($out, $level, "DocumentRoot", $this->documentRoot);
+        $this->outputDirective($out, $level, "ErrorLog", $this->errorLog);
+        $this->outputDirective($out, $level, "CustomLog", $this->customLog);
 
         if ($this->rewriteEngine) {
-            $out[] = "RewriteEngine " . $this->rewriteEngine;
-
-            if ($this->rewriteBase) {
-                $out[] = "RewriteBase " . $this->rewriteBase;
-            }
+            $this->outputDirective($out, $level, "RewriteEngine", $this->rewriteEngine);
+            $this->outputDirective($out, $level, "RewriteBase", $this->rewriteBase);
 
             if (!empty($this->rewriteDirectives)) {
                 foreach ($this->rewriteDirectives as $directive) {
-                    $out[] = $directive;
+                    $out[] = str_repeat('  ', $level) . $directive;
                 }
             }
         }
 
-        $this->buildDynamicDirectives($this->dynamicDirectives);
+        $this->buildDynamicDirectives($out, $level);
 
-        $out[] = "</{$this->tag}>";
+        $level--;
+        $out[] = str_repeat('  ', $level) . "</{$this->tag}>";
         return join("\n", $out);
     }
 

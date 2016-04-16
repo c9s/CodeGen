@@ -25,19 +25,44 @@ class BaseDirectiveGroup
         $this->dynamicDirectives[] = $directive;
     }
 
-    protected function buildDynamicDirectives(array &$out)
+    protected function buildDynamicDirectives(array &$out, $level = 0)
     {
         foreach ($this->dynamicDirectives as $directive) {
-            $out[] = $directive;
+            if ($directive instanceof self) {
+                $out[] = $directive->generate($level);
+            } else {
+                $out[] = str_repeat('  ', $level) . $directive;
+            }
         }
     }
 
-    public function generate() {
+    protected function outputDirective(array &$out, $level = 0, $directiveName, $value = null)
+    {
+        if ($value == null) {
+            return;
+        }
+
+        $str = str_repeat('  ', $level) . "{$directiveName} ";
+        if (is_array($value)) {
+            $str .= join(' ', $value);
+        } else {
+            $str .= $value;
+        }
+        $out[] = $str;
+    }
+
+    public function generate($level = 0)
+    {
         $out = [];
         $out[] = "<{$this->tag}>";
-        $this->buildDynamicDirectives($this->dynamicDirectives);
+        $this->buildDynamicDirectives($out, $level + 1);
         $out[] = "</{$this->tag}>";
         return join("\n",$out);
+    }
+
+    public function __toString()
+    {
+        return $this->generate();
     }
 
 
