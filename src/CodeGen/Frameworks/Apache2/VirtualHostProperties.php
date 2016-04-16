@@ -69,16 +69,23 @@ class VirtualHostProperties {
     protected $proxyPassReverse;
 
     /**
-     * @var boolean
+     * @var string
      * @synthesize
      */
     protected $rewriteEngine;
 
     /**
+     * @var string
+     * @synthesize
+     */
+    protected $rewriteBase;
+
+
+    /**
      * @var string[]
      * @synthesize
      */
-    protected $rewriteRules;
+    protected $rewriteDirectives;
 
     /**
      * @var string[string]
@@ -94,6 +101,18 @@ class VirtualHostProperties {
     {
         $this->bindHost = $bindHost;
         $this->bindPort = $bindPort;
+    }
+
+    public function addRewriteCond($testString, $condPattern)
+    {
+        $this->rewriteDirectives[] = "RewriteCond $testString $condPattern";
+        return $this;
+    }
+
+    public function addRewriteRule($pattern, $substitution, $flags = "")
+    {
+        $this->rewriteDirectives[] = "RewriteRulte $pattern $substitution $flags";
+        return $this;
     }
 
     public function generate()
@@ -120,6 +139,22 @@ class VirtualHostProperties {
         }
         if ($this->customLog) {
             $out[] = "CustomLog " . $this->customLog;
+        }
+
+        if ($this->rewriteEngine) {
+            $out[] = "RewriteEngine " . $this->rewriteEngine;
+
+            if ($this->rewriteBase) {
+                $out[] = "RewriteBase " . $this->rewriteBase;
+            }
+
+            if (!empty($this->rewriteDirectives)) {
+                foreach ($this->rewriteDirectives as $directive) {
+                    $out[] = $directive;
+                }
+            }
+
+
         }
         $out[] = "</VirtualHost>";
         return join("\n", $out);
