@@ -14,4 +14,14 @@ class AccessorClassGeneratorTest extends CodeGenTestCase
         $this->assertCodeEqualsFile('tests/data/accessor_class_generator_apache2.fixture', $appClass);
     }
 
+    public function testGeneratedApacheConfig()
+    {
+        $g = new AccessorClassGenerator([
+            'namespace' => 'CodeGen\Frameworks\Apache2',
+            'class_name' => 'ApacheSiteConfig',
+        ]);
+        $appClass = $g->generate(new VirtualHostProperties);
+        $appClass->generatePsr4ClassUnder('src/CodeGen/Frameworks/Apache2/');
+    }
+
 }

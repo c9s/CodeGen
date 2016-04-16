@@ -26,16 +26,24 @@ class AccessorClassGenerator
     protected function buildUserClassFromObject($object)
     {
         $reflObject = new ReflectionObject($object);
+
+        if (isset($this->options['class_name'])) {
+            $className = $this->options['class_name'];
+        } else if (isset($this->options['prefix'])) {
             $className = $this->options['prefix'] . $reflObject->getShortName();
-            if (!$this->options['namespace'] && $reflObject->inNamespace()) {
-                $namespace = $reflObject->getNamespaceName();
-                $className = '\\' . $namespace . '\\' . $className;
-            } else {
-                $className = $this->options['namespace'] . '\\' . $className;
-            }
-            $userClass = new UserClass($className);
-            $userClass->extendClass('\\' . $reflObject->getName(), false);
-            return $userClass;
+        } else {
+            throw new Exception('Neither class name or prefix is not defined.');
+        }
+
+        if (!$this->options['namespace'] && $reflObject->inNamespace()) {
+            $namespace = $reflObject->getNamespaceName();
+            $className = '\\' . $namespace . '\\' . $className;
+        } else {
+            $className = $this->options['namespace'] . '\\' . $className;
+        }
+        $userClass = new UserClass($className);
+        $userClass->extendClass('\\' . $reflObject->getName(), false);
+        return $userClass;
     }
 
     public function generate($object, UserClass $userClass = null)
