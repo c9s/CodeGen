@@ -5,7 +5,7 @@
     "require": {
         "php": ">=5.3.0",
         "doctrine/inflector": "*",
-        "twig/twig": "^1 >=1.21"
+        "twig/twig": "^1.21"
     },
     "require-dev": {
         "corneltek/phpunit-testmore": "dev-master"
@@ -14,11 +14,10 @@
     "authors": [
         {
             "name": "Yo-An Lin",
-            "email": "yoanlin93@gmail.com",
-            "homepage": "http://c9s.me"
+            "email": "yoanlin93@gmail.com"
         }
     ],
-    "extra": { "branch-alias": { "dev-master": "2.8.x-dev" } },
+    "extra": { "branch-alias": { "dev-master": "3.0.x-dev" } },
     "autoload": {
         "psr-4": {
             "CodeGen\\": "src/CodeGen/"
