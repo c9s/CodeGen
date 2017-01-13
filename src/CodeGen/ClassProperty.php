@@ -6,10 +6,12 @@ use CodeGen\Statement\Statement;
 class ClassProperty extends Statement implements Renderable
 {
     public $name;
+
     public $scope = 'public';
+
     public $value;
 
-    public function __construct($name, $value, $scope = 'public')
+    public function __construct($name, $value = null, $scope = 'public')
     {
         $this->name = $name;
         $this->value = $value;
