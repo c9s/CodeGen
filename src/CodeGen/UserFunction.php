@@ -1,5 +1,6 @@
 <?php
 namespace CodeGen;
+use Closure;
 
 class UserFunction extends Block implements Renderable
 {
@@ -33,7 +34,12 @@ class UserFunction extends Block implements Renderable
 
         $this->block = new BracketedBlock;
         if ($body) {
-            $this->block->setBody($body);
+            if ($body instanceof Closure) {
+                $ret = $body();
+                $this->block->setBody($ret);
+            } else {
+                $this->block->setBody($body);
+            }
         }
         if ($bodyArguments) {
             $this->block->setDefaultArguments($bodyArguments);
