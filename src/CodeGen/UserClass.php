@@ -167,7 +167,7 @@ class UserClass implements Renderable
     }
 
 
-    public function addStaticVar($name, $value, $scope = 'public')
+    public function addStaticVar($name, $value = null, $scope = 'public')
     {
         $this->staticVars[] = new ClassStaticVariable($name, $value, $scope);
         return $this;
