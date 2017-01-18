@@ -9,21 +9,21 @@ class UserClass implements Renderable
     /**
      * @var ClassName
      */
-    public $class;
+    protected $class;
 
-    public $extends;
+    protected $extends;
 
-    public $interfaces = array();
+    protected $interfaces = array();
 
-    public $uses = array();
+    protected $uses = array();
 
-    public $methods = array();
+    protected $methods = array();
 
-    public $consts = array();
+    protected $consts = array();
 
-    public $properties = array();
+    protected $properties = array();
 
-    public $staticVars = array();
+    protected $staticVars = array();
 
 
     /**
@@ -34,9 +34,9 @@ class UserClass implements Renderable
     /**
      * Registered trait
      */
-    public $traits = array();
+    protected $traits = array();
 
-    public $usedClasses = array();
+    protected $usedClasses = array();
 
     /**
      * constructor create a new class template object
