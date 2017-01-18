@@ -92,10 +92,4 @@ class UserFunction extends Block implements Renderable
         return 'function ' . $this->name . '(' . $this->renderArguments() . ")\n"
         . $this->block->render($args);
     }
-
 }
-
-
-
-
-

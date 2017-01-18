@@ -115,12 +115,35 @@ class UserClass implements Renderable
         $this->interfaces[] = $class;
     }
 
+    public function addStaticMethod($scope, $methodName, array $arguments = array(), $body = array(), array $bodyArguments = array())
+    {
+        $method = new StaticClassMethod($methodName, $arguments, $body, $bodyArguments);
+        $method->setScope($scope);
+        $this->methods[$methodName] = $method;
+        return $method;
+    }
+
     public function addMethod($scope, $methodName, array $arguments = array(), $body = array(), array $bodyArguments = array())
     {
         $method = new ClassMethod($methodName, $arguments, $body, $bodyArguments);
         $method->setScope($scope);
         $this->methods[$methodName] = $method;
         return $method;
+    }
+
+    public function addPublicMethod($methodName, array $arguments = array(), $body = array(), array $bodyArguments = array())
+    {
+        return $this->addMethod('public', $methodName, $arguments, $body, $bodyArguments);
+    }
+
+    public function addProtectedMethod($methodName, array $arguments = array(), $body = array(), array $bodyArguments = array())
+    {
+        return $this->addMethod('protected', $methodName, $arguments, $body, $bodyArguments);
+    }
+
+    public function addPrivateMethod($methodName, array $arguments = array(), $body = array(), array $bodyArguments = array())
+    {
+        return $this->addMethod('private', $methodName, $arguments, $body, $bodyArguments);
     }
 
     public function addMethodObject(ClassMethod $method)
