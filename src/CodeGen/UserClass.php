@@ -217,10 +217,12 @@ class UserClass implements Renderable
 
     public function render(array $args = array())
     {
-        $lines = array_merge([], $this->preStatements); // Add an option to render with a php tag
+        $lines = [];
         if ($this->class->namespace) {
             $lines[] = 'namespace ' . $this->class->namespace . ';';
         }
+
+        $lines = array_merge($lines, $this->preStatements); // Add an option to render with a php tag
 
         // When there is no namespace, we should skip the first-level class use statement.
         if ($this->uses) {
