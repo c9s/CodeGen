@@ -217,7 +217,7 @@ class UserClass implements Renderable
 
     public function render(array $args = array())
     {
-        $lines = array(); // Add an option to render with a php tag
+        $lines = array_merge([], $this->preStatements); // Add an option to render with a php tag
         if ($this->class->namespace) {
             $lines[] = 'namespace ' . $this->class->namespace . ';';
         }
@@ -269,6 +269,8 @@ class UserClass implements Renderable
             $block[] = $method;
         }
         $lines[] = $block->render($args);
+
+        $lines = array_merge($lines, $this->postStatements); // Add an option to render with a php tag
         return implode("\n", $lines);
     }
 
