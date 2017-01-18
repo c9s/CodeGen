@@ -2,14 +2,14 @@
 namespace CodeGen;
 
 use Exception;
+use CodeGen\Statement\Statement;
 
 class UserClass implements Renderable
 {
-
     /**
      * @var ClassName
      */
-    protected $class;
+    public $class;
 
     protected $extends;
 
@@ -25,6 +25,9 @@ class UserClass implements Renderable
 
     protected $staticVars = array();
 
+    protected $preStatements = array();
+
+    protected $postStatements = array();
 
     /**
      * @var boolean final class?
@@ -389,6 +392,18 @@ class UserClass implements Renderable
         $trait = new ClassTrait($classes);
         $this->addTrait($trait);
         return $trait;
+    }
+
+    public function prependStatement(Statement $stm)
+    {
+        $this->preStatements[] = $stm;
+        return $this;
+    }
+
+    public function appendStatement(Statement $stm)
+    {
+        $this->postStatements[] = $stm;
+        return $this;
     }
 }
 
