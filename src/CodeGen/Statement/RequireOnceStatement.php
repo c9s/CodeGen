@@ -3,7 +3,7 @@ namespace CodeGen\Statement;
 
 use CodeGen\Renderable;
 
-class RequireOnceStatement extends Statement implements Renderable
+class RequireOnceStatement extends RequireStatement implements Renderable
 {
     public function render(array $args = array())
     {
