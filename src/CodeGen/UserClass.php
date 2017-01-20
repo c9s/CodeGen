@@ -171,27 +171,26 @@ class UserClass implements Renderable
         }
     }
 
-    public function addProperty($name, $value, $scope = 'public')
+    public function addProperty($name, $value = null, $scope = 'public')
     {
         $this->properties[] = new ClassProperty($name, $value, $scope);
         return $this;
     }
 
-    public function addPublicProperty($name, $value)
+    public function addPublicProperty($name, $value = null)
     {
         return $this->addProperty($name, $value, 'public');
     }
 
-    public function addProtectedProperty($name, $value)
+    public function addProtectedProperty($name, $value = null)
     {
         return $this->addProperty($name, $value, 'protected');
     }
 
-    public function addPrivateProperty($name, $value)
+    public function addPrivateProperty($name, $value = null)
     {
         return $this->addProperty($name, $value, 'private');
     }
-
 
     public function addStaticVar($name, $value = null, $scope = 'public')
     {
