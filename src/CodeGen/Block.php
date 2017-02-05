@@ -106,7 +106,11 @@ class Block implements IteratorAggregate, ArrayAccess, Renderable
         $body = '';
         foreach ($this->lines as $line) {
             if (is_string($line)) {
-                $body .= $tab . $line . "\n";
+                if (strlen($line) > 0) {
+                    $body .= $tab . $line . "\n";
+                } else {
+                    $body .= "\n";
+                }
             } else if ($line instanceof Renderable) {
                 $subbody = rtrim($line->render()); // trim the trailing white-space
                 $sublines = explode("\n", $subbody);

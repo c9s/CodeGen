@@ -219,6 +219,7 @@ class UserClass implements Renderable
         $lines = [];
         if ($this->class->namespace) {
             $lines[] = 'namespace ' . $this->class->namespace . ';';
+            $lines[] = ''; // add one more empty line
         }
 
         $lines = array_merge($lines, $this->preStatements); // Add an option to render with a php tag
@@ -232,6 +233,7 @@ class UserClass implements Renderable
                 }
                 $lines[] = $u->render();
             }
+            $lines[] = ''; // add one more empty line
         }
 
         $classDeclare = ($this->final ? 'final ' : '')
@@ -250,23 +252,28 @@ class UserClass implements Renderable
 
         $block = new BracketedBlock;
         foreach ($this->traits as $trait) {
+            $block[] = '';
             $block[] = $trait;
         }
 
         foreach ($this->consts as $const) {
+            $block[] = '';
             $block[] = $const;
         }
 
         foreach ($this->staticVars as $var) {
+            $block[] = '';
             $block[] = $var;
         }
 
         foreach ($this->properties as $property) {
+            $block[] = '';
             $block[] = $property;
         }
 
         foreach ($this->methods as $method) {
             $method->getBlock()->setIndentLevel(1);
+            $block[] = '';
             $block[] = $method;
         }
         $lines[] = $block->render($args);
