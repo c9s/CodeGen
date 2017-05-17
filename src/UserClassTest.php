@@ -1,5 +1,7 @@
 <?php
-use CodeGen\UserClass;
+
+namespace CodeGen;
+
 use CodeGen\Testing\CodeGenTestCase;
 
 class UserClassTest extends CodeGenTestCase

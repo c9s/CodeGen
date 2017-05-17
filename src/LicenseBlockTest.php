@@ -1,6 +1,8 @@
 <?php
+
+namespace CodeGen;
+
 use CodeGen\Testing\CodeGenTestCase;
-use CodeGen\LicenseBlock;
 
 class LicenseBlockTest extends CodeGenTestCase
 {

@@ -1,5 +1,7 @@
 <?php
-use CodeGen\Block;
+
+namespace CodeGen;
+
 use CodeGen\BracketedBlock;
 use CodeGen\Testing\CodeGenTestCase;
 
