@@ -1,4 +1,5 @@
 <?php
+
 namespace CodeGen\Frameworks\Apache2;
 
 class DirectoryMatch

@@ -3,7 +3,7 @@ use CodeGen\Generator\ArrayAccessGenerator;
 use CodeGen\Testing\CodeGenTestCase;
 use CodeGen\UserClass;
 
-class ArrayAccessGeneratorTest extends PHPUnit_Framework_TestCase
+class ArrayAccessGeneratorTest extends \PHPUnit\Framework\TestCase
 {
     public function test()
     {

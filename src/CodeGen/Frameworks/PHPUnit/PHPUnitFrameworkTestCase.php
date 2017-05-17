@@ -11,7 +11,7 @@ class PHPUnitFrameworkTestCase extends UserClass
     {
         $class = Inflector::classify(preg_replace('/\W+/', ' ', $title));
         parent::__construct($class);
-        $this->extendClass('PHPUnit_Framework_TestCase', true);
+        $this->extendClass('\PHPUnit\Framework\TestCase', true);
     }
 
     public function addTest($testName)

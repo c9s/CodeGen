@@ -2,9 +2,9 @@
 namespace CodeGen\Testing;
 
 use CodeGen\Renderable;
-use PHPUnit_Framework_TestCase;
+use \PHPUnit\Framework\TestCase;
 
-abstract class CodeGenTestCase extends PHPUnit_Framework_TestCase
+abstract class CodeGenTestCase extends \PHPUnit\Framework\TestCase
 {
 
     public function assertCodeEquals($expected, Renderable $code, array $args = array())

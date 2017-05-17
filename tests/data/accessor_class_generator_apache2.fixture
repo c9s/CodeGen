@@ -1,3 +1,4 @@
+
 namespace CodeGen\Frameworks\Apache2;
 
 class AppVirtualHostDirectiveGroup

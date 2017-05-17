@@ -1,7 +1,7 @@
 <?php
 use CodeGen\UserFunction;
 
-class UserFunctionTest extends PHPUnit_Framework_TestCase
+class UserFunctionTest extends \PHPUnit\Framework\TestCase
 {
     public function testSimpleUserFunction()
     {

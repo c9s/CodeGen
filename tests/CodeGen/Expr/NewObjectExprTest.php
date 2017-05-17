@@ -1,7 +1,7 @@
 <?php
 use CodeGen\Expr\NewObjectExpr;
 
-class NewObjectExprTest extends PHPUnit_Framework_TestCase
+class NewObjectExprTest extends \PHPUnit\Framework\TestCase
 {
     public function testNewObjectExprWithSplObjectStorage()
     {

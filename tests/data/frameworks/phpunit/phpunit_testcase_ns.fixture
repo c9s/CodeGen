@@ -1,7 +1,11 @@
+
 namespace SomeNamespace;
 
+
+use PHPUnit\Framework\TestCase;
+
 class MyAppNsTest
-    extends PHPUnit_Framework_TestCase
+    extends TestCase
 {
 
     public function testArrayIsNotEmpty()

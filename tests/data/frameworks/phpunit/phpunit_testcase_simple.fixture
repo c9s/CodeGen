@@ -1,5 +1,8 @@
+
+use PHPUnit\Framework\TestCase;
+
 class MyAppSimpleTest
-    extends PHPUnit_Framework_TestCase
+    extends TestCase
 {
 
     public function testSimple()
