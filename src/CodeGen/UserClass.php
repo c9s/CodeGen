@@ -218,6 +218,7 @@ class UserClass implements Renderable
     {
         $lines = [];
         if ($this->class->namespace) {
+            $lines[] = ''; // add one more empty line for PSR
             $lines[] = 'namespace ' . $this->class->namespace . ';';
             $lines[] = ''; // add one more empty line
         }
