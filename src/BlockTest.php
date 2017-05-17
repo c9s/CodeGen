@@ -1,5 +1,7 @@
 <?php
-use CodeGen\Block;
+
+namespace CodeGen;
+
 use CodeGen\Testing\CodeGenTestCase;
 
 class BlockTest extends CodeGenTestCase
@@ -10,7 +12,7 @@ class BlockTest extends CodeGenTestCase
         $block->setBody('${{name}} = 1;');
         $block->appendLine('${{name}} = ${{name}} + 1;');
         $block->appendLine('return ${{name}};');
-        $code = $block->render(array( 
+        $code = $block->render(array(
             'name' => 'a'
         ));
         $this->assertNotEmpty($code);

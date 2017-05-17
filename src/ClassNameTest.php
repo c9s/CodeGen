@@ -1,15 +1,12 @@
 <?php
+
+namespace CodeGen;
+
 use CodeGen\Testing\CodeGenTestCase;
 use CodeGen\Statement\RequireStatement;
 use CodeGen\Statement\RequireOnceStatement;
 use CodeGen\Statement\Statement;
 use CodeGen\Expr\AssignExpr;
-use CodeGen\Raw;
-use CodeGen\Constant;
-use CodeGen\ArgumentList;
-use CodeGen\Variable;
-use CodeGen\ClassName;
-use CodeGen\Block;
 
 class ClassNameTest extends CodeGenTestCase
 {
