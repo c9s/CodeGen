@@ -1,7 +1,9 @@
 <?php
-use CodeGen\Raw;
+
+namespace CodeGen\Expr;
+
 use CodeGen\Variable;
-use CodeGen\Expr\MethodCall;
+use CodeGen\Raw;
 use CodeGen\Testing\CodeGenTestCase;
 
 class MethodCallTest extends CodeGenTestCase

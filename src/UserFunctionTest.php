@@ -1,5 +1,6 @@
 <?php
-use CodeGen\UserFunction;
+
+namespace CodeGen;
 
 class UserFunctionTest extends \PHPUnit\Framework\TestCase
 {
