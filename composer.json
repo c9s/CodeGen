@@ -5,7 +5,7 @@
     "require": {
         "php": ">=5.3.0",
         "doctrine/inflector": "*",
-        "twig/twig": "^2|~1.32.0"
+        "twig/twig": "^1|^2"
     },
     "require-dev": { },
     "license": "MIT",
@@ -15,7 +15,7 @@
             "email": "yoanlin93@gmail.com"
         }
     ],
-    "extra": { "branch-alias": { "dev-master": "3.2.x-dev" } },
+    "extra": { "branch-alias": { "dev-master": "4.0.x-dev" } },
     "autoload": {
         "psr-4": {
             "CodeGen\\": "src/"

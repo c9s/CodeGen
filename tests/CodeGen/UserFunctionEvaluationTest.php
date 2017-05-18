@@ -19,7 +19,7 @@ class UserFunctionEvaluationTest extends \PHPUnit\Framework\TestCase
 
     public function testUserFuncWithBody()
     {
-        $func = new UserFunction('user_foo_body', array('$i', '$x = 2'), 'return $i + $x * {{f}};', array('f' => 100 ));
+        $func = new UserFunction('user_foo_body', array('$i', '$x = 2'), 'return $i + $x * 100;');
         eval($func->render());
 
         // echo $func->__toString();

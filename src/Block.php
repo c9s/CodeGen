@@ -19,8 +19,6 @@ class Block implements IteratorAggregate, ArrayAccess, Renderable
 {
     public $lines = array();
 
-    public $args = array();
-
     public function __construct(array $lines = array())
     {
         $this->lines = $lines;
@@ -30,12 +28,6 @@ class Block implements IteratorAggregate, ArrayAccess, Renderable
      * The default indent level.
      */
     public $indentLevel = 0;
-
-    public function setDefaultArguments(array $args)
-    {
-        $this->args = $args;
-        return $this;
-    }
 
     public function setLines(array $lines)
     {
@@ -100,7 +92,7 @@ class Block implements IteratorAggregate, ArrayAccess, Renderable
         $this->indentLevel = $indent;
     }
 
-    public function render(array $args = array())
+    public function render()
     {
         $tab = Indenter::indent($this->indentLevel);
         $body = '';
@@ -122,7 +114,7 @@ class Block implements IteratorAggregate, ArrayAccess, Renderable
                 throw new InvalidArgumentTypeException('Unsupported line object type', $line, array('string', 'Renderable'));
             }
         }
-        return Utils::renderStringTemplate($body, array_merge($this->args, $args));
+        return $body;
     }
 
     // ============ interface ArrayAggregator implementation =============

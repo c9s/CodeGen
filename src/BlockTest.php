@@ -6,20 +6,6 @@ use CodeGen\Testing\CodeGenTestCase;
 
 class BlockTest extends CodeGenTestCase
 {
-    public function testBlockWithSetBody()
-    {
-        $block = new Block;
-        $block->setBody('${{name}} = 1;');
-        $block->appendLine('${{name}} = ${{name}} + 1;');
-        $block->appendLine('return ${{name}};');
-        $code = $block->render(array(
-            'name' => 'a'
-        ));
-        $this->assertNotEmpty($code);
-        $ret = eval($code);
-        $this->assertEquals(2, $ret);
-    }
-
     public function testAppendLineMethodAndArrayAggregate() {
         $block = new Block;
         $block->appendLine('$a = 1;');

@@ -89,9 +89,4 @@ DAMAGE.';
         ));
         parent::__construct(explode("\n", $content));
     }
-
 }
-
-
-
-

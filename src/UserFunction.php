@@ -27,7 +27,7 @@ class UserFunction extends Block implements Renderable
      * @param string $body the code of the function.
      * @param array $bodyArguments the template arguments of the code of the function.
      */
-    public function __construct($name, array $arguments = array(), $body = '', array $bodyArguments = array())
+    public function __construct($name, array $arguments = array(), $body = '')
     {
         $this->name = $name;
         $this->arguments = $arguments;
@@ -40,9 +40,6 @@ class UserFunction extends Block implements Renderable
             } else {
                 $this->block->setBody($body);
             }
-        }
-        if ($bodyArguments) {
-            $this->block->setDefaultArguments($bodyArguments);
         }
     }
 

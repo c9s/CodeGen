@@ -5,7 +5,7 @@ use Exception;
 
 class CommentBlock extends Block implements Renderable
 {
-    public function render(array $args = array())
+    public function render()
     {
         $tab = Indenter::indent($this->indentLevel);
         $body = '';
@@ -26,9 +26,8 @@ class CommentBlock extends Block implements Renderable
             }
         }
         $body .= " */\n";
-        return Utils::renderStringTemplate($body, array_merge($this->args, $args));
+        return $body;
     }
-
 }
 
 

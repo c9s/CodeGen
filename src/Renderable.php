@@ -3,7 +3,5 @@ namespace CodeGen;
 
 interface Renderable
 {
-    public function render(array $args = array());
+    public function render();
 }
-
-

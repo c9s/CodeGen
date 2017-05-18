@@ -1,4 +1,7 @@
 <?php
+
+namespace CodeGen;
+
 use CodeGen\Testing\CodeGenTestCase;
 use CodeGen\Statement\RequireStatement;
 use CodeGen\Statement\RequireOnceStatement;
@@ -17,11 +20,4 @@ class VariableTest extends CodeGenTestCase
         $var = new Variable('$foo');
         $this->assertCodeEqualsFile('tests/data/variable.fixture', $var);
     }
-
-    public function testVariableRenderTemplate()
-    {
-        $var = Variable::template('${{ foo }}', array( 'foo' => 'bar' ));
-        $this->assertCodeEqualsFile('tests/data/variable_template.fixture', $var);
-    }
 }
-
