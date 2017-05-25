@@ -8,18 +8,11 @@ use ReflectionObject;
 
 class ClassFile extends UserClass
 {
-    public $templateFile;
-    public $templateDirs;
-    public $options = array();
-
     /**
      * constructor create a new class template object
      *
      * @param string $className
-     * @param array $options 
      *
-     * a sample options:
-     * 
      * $t = new ClassTemplate('NewClassFoo',[
      *   'template_dirs' => [ path1, path2 ],
      *   'template' => 'Class.php.twig',
@@ -28,19 +21,9 @@ class ClassFile extends UserClass
      * ])
      *
      */
-    public function __construct($className, array $options = array())
+    public function __construct($className)
     {
         parent::__construct($className);
-        $this->setOptions($options);
-    }
-
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
-    }
-
-    public function setOption($key, $val) {
-        $this->options[$key] = $val;
     }
 
     public function render(array $args = array())

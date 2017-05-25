@@ -46,8 +46,6 @@ class UserClass implements Renderable
      *
      * @param string $className
      *
-     * a sample options:
-     *
      * $t = new ClassDeclare('NewClassFoo')
      *
      */
