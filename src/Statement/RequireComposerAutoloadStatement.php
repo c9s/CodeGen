@@ -10,7 +10,6 @@ class RequireComposerAutoloadStatement extends RequireStatement
      */
     public function __construct(array $prefixes = array())
     {
-        $prefixes[] = getcwd();
         foreach ($prefixes as $prefix) {
             $path = $prefix . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
             if (file_exists($path)) {
