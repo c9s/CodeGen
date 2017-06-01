@@ -312,9 +312,11 @@ class UserClass implements Renderable
         return $path;
     }
 
-    public function generatePsr4ClassUnder($directory, array $args = array())
+
+    public function getPsr4ClassPathUnder($directory)
     {
         $className = $this->class->name;
+        $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
 
         // translate psr4 class map to actual directory
         if (is_array($directory)) {
@@ -334,14 +336,23 @@ class UserClass implements Renderable
 
         $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
 
-        // TODO: import copyright text
-        $code = "<?php\n" . $this->render($args);
-        $path = $directory . DIRECTORY_SEPARATOR . $className . '.php';
+        return $directory . DIRECTORY_SEPARATOR . $className . '.php';
+    }
+
+
+    public function generatePsr4ClassUnder($directory)
+    {
+        $path = $this->getPsr4ClassPathUnder($directory);
+        $className = $this->class->name;
+
         if ($dir = dirname($path)) {
             if (!file_exists($dir)) {
                 mkdir($dir, 0755, true);
             }
         }
+
+        // TODO: import copyright text
+        $code = "<?php\n" . $this->render();
         if (file_put_contents($path, $code) === false) {
             return false;
         }
