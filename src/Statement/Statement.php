@@ -24,8 +24,4 @@ class Statement extends Line implements Renderable
     {
         return $this->expr->render($args) . ';';
     }
-
 }
-
-
-
