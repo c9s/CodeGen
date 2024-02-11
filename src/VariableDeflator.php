@@ -17,7 +17,7 @@ class VariableDeflator
             return $arg->render(array());
         } else if ($arg instanceof Raw) {
             return (string)$arg;
-        } else if ($arg instanceof Exportable || method_exists($arg, '__get_state')) {
+        } else if ($arg instanceof Exportable || ((is_object($arg) || is_string($arg)) && method_exists($arg, '__get_state'))) {
             $class = get_class($arg);
             return $class . '::__set_state(' . var_export($arg->__get_state(), true) . ')';
         } else if (is_array($arg) || is_scalar($arg) || method_exists($arg, '__set_state')) {
